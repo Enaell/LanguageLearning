@@ -1,0 +1,13 @@
+{
+    "ZWXdb":
+    {
+        "host":"localhost",
+        "port":27017,
+        "url":"",
+        "database":"ZhongWenXue",
+        "password":"",
+        "name":"ZWXdb",
+        "user":"me",
+        "connector":"mongodb"
+    }
+}
