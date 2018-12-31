@@ -17,3 +17,6 @@ package.json scripts
 
 to run devs servers
    npm run start-dev
+
+run mongodb server with
+    sudo service mongod start

@@ -7,15 +7,15 @@
     "validateUpsert": true
   },
   "properties": {
-    "word": {
+    "character": {
       "type": "string",
       "required": true
     },
-    "pinyin": {
+    "pinying": {
       "type": "string",
       "required": true
     },
-    "traduction": {
+    "translation": {
       "type": "string",
       "required": true
     },
