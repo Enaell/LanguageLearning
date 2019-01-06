@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 
+import Link from 'react-router-dom/Link';
+import {connect} from 'react-redux';
+
 import CharacterCard from './CharacterCard/CharacterCard';
 import TranslationList from './TranslationList/TranslationList';
 
 import '../css/CharacterQuizz.css'
+
 
 const styles = theme => ({
   root: {
@@ -22,7 +26,7 @@ function Hero() {
     <div className="row">
       <div className="jumbotron col-12">
         <h1>Character Quizz</h1>
-        <p>Select the correct traduction the character</p>
+        <p>Select the correct traduction of the character</p>
       </div>
     </div>
   );
@@ -66,33 +70,54 @@ Turn.propTypes = {
 }
 
 
-function Continue() {
+function Continue({show, onContinue}) {
   return (
-    <div>
+    <div className="row">
+    {
+       show ?
+        <div className="col-11"><button className="btn btn-primary btn-lg float-right" onClick={onContinue}> Continue </button></div>
+      : null
+    }
     </div>
   )
 }
 
-function CharacterQuizz(props) {
-  // console.log('CharacterQuizz')
-  // console.log(...turnData);
-  const { turnData, highlight, onAnswerSelected, classes } = props;
-
-  return (
-    <div className="row">
-      <div className="col-8 offset-2 characterQuizz">
-        <Hero />
-        <Paper className={classes.root} elevation={3}>
-          <Turn {...turnData} highlight={highlight} onAnswerSelected={onAnswerSelected} />
-          <Continue />
-        </Paper>
-      </div>
-    </div>
-  );
+function mapStateToProps(state){
+  return {
+    turnData: state.turnData,
+    highlight: state.highlight
+  }
 }
 
-CharacterQuizz.propTypes = {
-  onAnswerSelected: PropTypes.func.isRequired
+function mapDispatchToProps(dispatch){
+  return{
+    onAnswerSelected: (answer) => { 
+      dispatch({type: 'ANSWER_SELECTED', answer});
+    },
+    onContinue: () => {
+      dispatch({type: 'CONTINUE'});
+    }
+  }
 }
+
+const CharacterQuizz = connect(mapStateToProps, mapDispatchToProps) (
+  function ({turnData, highlight, onAnswerSelected, classes, onContinue}) {
+      return (
+      <React.Fragment>
+        <div className="row">
+          <div className="col-8 offset-2 characterQuizz">
+            <Hero />
+            <Paper className={classes.root} elevation={3}>
+              <Turn {...turnData} highlight={highlight} onAnswerSelected={onAnswerSelected} />
+            </Paper>
+              <Continue show={highlight === 'correct'} onContinue={onContinue}/>
+          </div>
+        </div>
+        <div className="row">
+          <Link to="/addCard"> Add a new Card</Link>
+        </div>
+      </React.Fragment>
+    );
+  })
 
 export default withStyles(styles)(CharacterQuizz);

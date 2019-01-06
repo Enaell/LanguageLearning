@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import '../css/App.css';
 import '../../bootstrap.min.css';
-import CharacterQuizz from './characterQuizz/components/CharacterQuizz.js';
+import CharacterQuizz from './characterQuizz/components/CharacterQuizz';
+import AddCardForm from './addCard/addCardForm'
 import {shuffle, sample} from 'underscore';
-import PropTypes, { func } from 'prop-types';
-
+import { BrowserRouter, Route } from 'react-router-dom'
+import * as Redux from 'redux';
+import * as ReactRedux from 'react-redux';
 
 import ReactDOM from 'react-dom';
 import { stat } from 'fs';
@@ -85,11 +87,34 @@ function getTurnData(cards){
   }
 }
 
+function reducer(state = { cards, turnData: getTurnData(cards), highlight: '' }, action)
+{
+  switch (action.type){
+    case 'ANSWER_SELECTED':
+        const isCorrect = state.turnData.card.translations.some((tr) => tr === action.answer);
+        return Object.assign(
+          {}, 
+          state,
+          {highlight: isCorrect ? 'correct' : 'wrong'}
+        );
+    case 'CONTINUE':
+        return Object.assign(
+          {},
+          state,
+          {highlight:'', turnData: getTurnData(state.cards)}
+        );
+    case 'ADD_CARD':
+        return Object.assign(
+          {},
+          state,
+          {cards: state.cards.concat([action.card])}
+        );
+    default:
+      return state;
+  }
+}
 
-const state = {
-  turnData: getTurnData(cards),
-  highlight: ''
-};
+let store = Redux.createStore(reducer);
 
 function Footer() {
   return(
@@ -101,24 +126,20 @@ function Footer() {
   )
 }
 
-function onAnswerSelected(answer){
-  const isCorrect = state.turnData.card.translations.some((tr) => tr === answer);
-  state.highlight = isCorrect ? 'correct' : 'wrong';
-
-  console.log(state);
-
-  ReactDOM.render(<App />, document.getElementById('root'));
-
-}
-
 class App extends Component {
-  
   render() {
     return (
-      <div className="container-fluid" id="App">
-        <CharacterQuizz {...state} onAnswerSelected={onAnswerSelected} />
-        <Footer />
-      </div>
+      <ReactRedux.Provider store={store}>
+        <div className="container-fluid" id="App">
+          <BrowserRouter>
+            <React.Fragment>
+              <Route exact path="/" render={() => <CharacterQuizz />} />
+              <Route path="/addCard" component={AddCardForm} />
+            </React.Fragment>
+          </BrowserRouter>
+          <Footer />
+        </div>
+      </ReactRedux.Provider>
     );
   }
 }

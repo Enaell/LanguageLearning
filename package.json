@@ -23,6 +23,8 @@
     "loopback-component-explorer": "^6.0.0",
     "loopback-connector-mongodb": "^3.9.2",
     "nodemon": "^1.18.9",
+    "react-redux": "^6.0.0",
+    "redux": "^4.0.1",
     "serve-favicon": "^2.0.1",
     "strong-error-handler": "^2.0.0"
   },

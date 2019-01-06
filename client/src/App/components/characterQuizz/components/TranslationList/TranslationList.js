@@ -6,8 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 
 
-function Translation(props){
-  const {translation, selectAnswer} = props;
+function Translation({translation, selectAnswer}){
 
 
 
@@ -24,8 +23,7 @@ Translation.propTypes ={
   translation: PropTypes.string.isRequired
 }
 
-function TranslationList (props){
-  const {translations, onAnswerSelected} = props;
+function TranslationList ({translations, onAnswerSelected}){
   return (
     <div >
       <List component="nav">
