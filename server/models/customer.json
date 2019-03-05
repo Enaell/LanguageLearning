@@ -1,33 +1,31 @@
 {
-  "name": "card",
-  "plural": "cards",
-  "base": "PersistedModel",
+  "name": "customer",
+  "base": "User",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "word": {
+    "name": {
       "type": "string",
       "required": true
     },
-    "internationalSpelling": {
-      "type": "string",
-      "required": true
-    },
-    "language": {
-      "type": "string",
-      "required": true
-    },
-    "translations": {
-      "type": [
-        "object"
-      ],
-      "required": true
+    "email": {
+      "type": "string"
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "cardLists": {
+      "type": "hasMany",
+      "model": "cardList",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true,
+        "disableInclude": true
+      }
+    }
+  },
   "acls": [
     {
       "accessType": "*",
@@ -36,9 +34,9 @@
       "permission": "DENY"
     },
     {
-      "accessType": "READ",
+      "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "$everyone",
+      "principalId": "$owner",
       "permission": "ALLOW"
     },
     {

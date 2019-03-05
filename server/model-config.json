@@ -16,5 +16,42 @@
   "card": {
     "dataSource": "ZWXdb",
     "public": true
+  },
+  "cardList": {
+    "dataSource": "ZWXdb",
+    "public": true
+  },
+  "customer": {
+    "dataSource": "ZWXdb",
+    "public": true,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "User": {
+    "dataSource": "ZWXdb",
+    "public": true,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "AccessToken": {
+    "dataSource": "ZWXdb",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "ZWXdb",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "ZWXdb",
+    "options": {
+      "strictObjectIDCoercion": true
+    },
+    "public": false
+  },
+  "Role": {
+    "dataSource": "ZWXdb",
+    "public": false
   }
 }

@@ -1,33 +1,41 @@
 {
-  "name": "card",
-  "plural": "cards",
+  "name": "cardList",
+  "plural": "cardLists",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "word": {
-      "type": "string",
-      "required": true
-    },
-    "internationalSpelling": {
-      "type": "string",
-      "required": true
-    },
     "language": {
       "type": "string",
       "required": true
     },
-    "translations": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "exercices": {
       "type": [
         "object"
-      ],
-      "required": true
+      ]
+    },
+    "comments": {
+      "type": "string"
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "cards": {
+      "type": "hasMany",
+      "model": "card",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true,
+        "disableInclude": true
+      }
+    }
+  },
   "acls": [
     {
       "accessType": "*",
@@ -36,15 +44,15 @@
       "permission": "DENY"
     },
     {
-      "accessType": "READ",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW"
-    },
-    {
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
       "permission": "ALLOW"
     },
     {

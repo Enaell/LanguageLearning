@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import TextField from '@material-ui/core/TextField';
-
+import Button from '@material-ui/core/Button';
 
 class CardForm extends React.Component{
   constructor(props){
@@ -22,6 +22,7 @@ class CardForm extends React.Component{
 
   handleSubmit(event){
     event.preventDefault();
+    console.log(this.state);
     this.props.onAddCard(this.state);
   }
 
@@ -30,8 +31,8 @@ class CardForm extends React.Component{
       translations: this.state.translations.concat([this.state.translationTemp]),
       translationTemp: ''
     });
-  }
 
+  }
   onFieldChange(event){
     this.setState({[event.target.name]: event.target.value});
   }
@@ -40,7 +41,7 @@ class CardForm extends React.Component{
     return(
       <form onSubmit={this.handleSubmit}>
 
-        {/* <TextField
+        <TextField
           id="outlined-character-input"
           label="Character"
           margin="normal"
@@ -48,24 +49,47 @@ class CardForm extends React.Component{
           value={this.state.character}
           onChange={this.onFieldChange}
           name="character"
-        /> */}
+          required
+        />
 
-        <label htmlFor="character">Character</label>
-        <input type="texte" name="character" value={this.state.character} onChange={this.onFieldChange} />
+        <TextField
+          id="outlined-pinying-input"
+          label="Pinying"
+          margin="normal"
+          variant="outlined"
+          value={this.state.pinying}
+          onChange={this.onFieldChange}
+          name="pinying"
+          required
+        />
 
-        <label htmlFor="pinying">Pinying</label>
-        <input type="texte" name="pinying" value={this.state.pinying} onChange={this.onFieldChange}/>
+        <TextField
+          id="outlined-comments-input"
+          label="Comments"
+          margin="normal"
+          variant="outlined"
+          value={this.state.comments}
+          onChange={this.onFieldChange}
+          name="comments"
+        />
 
-        <label htmlFor="pinying">Comments</label>
-        <input type="texte" name="comments" value={this.state.comments} onChange={this.onFieldChange}/>
+        <TextField
+          id="outlined-translationTemp-input"
+          label="Translation"
+          margin="normal"
+          variant="outlined"
+          value={this.state.translationTemp}
+          onChange={this.onFieldChange}
+          name="translationTemp"
 
-        {this.state.translations.map((tr) => <p key={tr}>{tr}</p>)}
-        <label htmlFor="translationTemp">Translations</label>
-        <input type="text" name="translationTemp" value={this.state.translationTemp} onChange={this.onFieldChange}></input>
-        <input type="button" value="+" onClick={this.handleAddTranslation}></input>
+        />
+        <Button variant="contained" onClick={this.handleAddTranslation}>
+          Add
+        </Button>
 
-        <input type="submit" value="Add"></input>
-      </form>
+        <Button type="submit" variant="contained">
+          Add
+        </Button>      </form>
     )}
 }
 
@@ -87,4 +111,9 @@ function mapDispatchToProps(dispatch, props){
   }
 }
 
-export default withRouter(connect (()=>{}, mapDispatchToProps)(AddCardForm));
+function mapStateToProps()
+{
+  return({})
+}
+
+export default withRouter(connect (mapStateToProps, mapDispatchToProps)(AddCardForm));
