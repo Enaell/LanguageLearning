@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
 import CharacterCard from './CharacterCard/CharacterCard';
 import TranslationList from './TranslationList/TranslationList';
 
-import '../css/CharacterQuizz.css'
+import '../css/cardTrainingPage.css'
 
 
 const styles = theme => ({
@@ -82,25 +82,7 @@ function Continue({show, onContinue}) {
   )
 }
 
-function mapStateToProps(state){
-  return {
-    turnData: state.turnData,
-    highlight: state.highlight
-  }
-}
-
-function mapDispatchToProps(dispatch){
-  return{
-    onAnswerSelected: (answer) => { 
-      dispatch({type: 'ANSWER_SELECTED', answer});
-    },
-    onContinue: () => {
-      dispatch({type: 'CONTINUE'});
-    }
-  }
-}
-
-const CharacterQuizz = connect(mapStateToProps, mapDispatchToProps) (
+const CardTrainingPage = connect(mapStateToProps, mapDispatchToProps) (
   function ({turnData, highlight, onAnswerSelected, classes, onContinue}) {
       return (
       <React.Fragment>
@@ -110,7 +92,7 @@ const CharacterQuizz = connect(mapStateToProps, mapDispatchToProps) (
             <Paper className={classes.root} elevation={3}>
               <Turn {...turnData} highlight={highlight} onAnswerSelected={onAnswerSelected} />
             </Paper>
-              <Continue show={highlight === 'correct'} onContinue={onContinue}/>
+            <Continue show={highlight === 'correct'} onContinue={onContinue}/>
           </div>
         </div>
         <div className="row">
@@ -120,4 +102,28 @@ const CharacterQuizz = connect(mapStateToProps, mapDispatchToProps) (
     );
   })
 
-export default withStyles(styles)(CharacterQuizz);
+
+
+function mapStateToProps(state){
+  return {
+    turnData: state.turnData,
+    highlight: state.highlight
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return{
+    onAnswerSelected: (payload) => { 
+      dispatch({type: 'ANSWER_SELECTED', payload});
+    },
+    onContinue: () => {
+      dispatch({type: 'CONTINUE'});
+    },
+    getCards: () => {
+      dispatch({type:'GET_CARDS'});
+    }
+    
+  }
+}
+
+export default withStyles(styles)(CardTrainingPage);
