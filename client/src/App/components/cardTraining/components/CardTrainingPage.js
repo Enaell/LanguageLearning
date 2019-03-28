@@ -51,7 +51,6 @@ function Turn(props) {
       </div>
       <div className="col-6">
         <TranslationList translations={translations} onAnswerSelected={onAnswerSelected} />
-        {/* {translations.map((tr) => <Translation translation={tr} key={tr}/>)} */}
       </div>
     </div>
   );

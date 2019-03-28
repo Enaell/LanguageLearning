@@ -80,18 +80,17 @@ function getTurnData(cards){
   }
 }
 
-const initialState = {
-  cards: []
-}
-
-function reducer(state = initialState, action)
+function reducer(state, action)
 {
   switch (action.type){
     case 'GET_CARDS':
+        console.log('Get cards');
+        const cards = getCards();
+        console.log(cards);
         return Object.assign(
           {},
           state,
-          {cards: getCards}
+          {cards: cards, turnData: getTurnData(cards), highlight:''},
         )
     case 'ANSWER_SELECTED':
         const isCorrect = state.turnData.card.translations.some((tr) => tr === action.payload);
@@ -112,6 +111,14 @@ function reducer(state = initialState, action)
           state,
           {cards: state.cards.concat([action.card])}
         );
+    case 'LOG_STATE':
+        console.log(state);
+        return state;
+
+    // case 'TRAINING_PAGE':
+    //       return dispatch({type: 'GET_CARDS'})
+                  // .then(history.push('/cardTraining'))
+          
     default:
       return state;
   }

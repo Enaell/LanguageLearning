@@ -7,9 +7,6 @@ import PropTypes from 'prop-types';
 
 
 function Translation({translation, selectAnswer}){
-
-
-
   return (
     <ListItem button onClick={() => {selectAnswer(translation)}}> 
       <ListItemText primary={<Typography variant="h5">{translation}</Typography>}  />
