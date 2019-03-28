@@ -9,7 +9,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import * as Redux from 'redux';
 import * as ReactRedux from 'react-redux';
 import reducer from '../redux/reducer';
-
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import ReactDOM from 'react-dom';
 import { stat } from 'fs';
@@ -17,7 +17,7 @@ import { stat } from 'fs';
 console.log(React.version);
 
 
-let store = Redux.createStore(reducer);
+let store = Redux.createStore(reducer, composeWithDevTools());
 
 class App extends Component {
   render() {

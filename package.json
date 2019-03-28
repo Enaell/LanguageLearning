@@ -30,7 +30,8 @@
     "strong-error-handler": "^2.0.0"
   },
   "devDependencies": {
-    "eslint-config-loopback": "^8.0.0"
+    "eslint-config-loopback": "^8.0.0",
+    "redux-devtools-extension": "^2.13.8"
   },
   "repository": {
     "type": "",

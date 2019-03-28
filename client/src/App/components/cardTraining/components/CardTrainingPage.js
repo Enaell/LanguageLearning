@@ -81,9 +81,9 @@ function Continue({show, onContinue}) {
   )
 }
 
-const CardTrainingPage = connect(mapStateToProps, mapDispatchToProps) (
-  function ({turnData, highlight, onAnswerSelected, classes, onContinue}) {
-      return (
+const CardTrainingPage = ({turnData, highlight, onAnswerSelected, classes, onContinue}) => 
+  {
+    return (
       <React.Fragment>
         <div className="row">
           <div className="col-8 offset-2 characterQuizz">
@@ -99,7 +99,7 @@ const CardTrainingPage = connect(mapStateToProps, mapDispatchToProps) (
         </div>
       </React.Fragment>
     );
-  })
+  }
 
 
 
@@ -125,4 +125,4 @@ function mapDispatchToProps(dispatch){
   }
 }
 
-export default withStyles(styles)(CardTrainingPage);
+export default connect(mapStateToProps, mapDispatchToProps) (withStyles(styles)(CardTrainingPage));

@@ -5,9 +5,9 @@
 
 
 //   User.create([
-//     {username: 'John', email: 'john@doe.com', password: 'opensesame', name:'Jhon'},
-//     {username: 'Jane', email: 'jane@doe.com', password: 'opensesame', name:'Jane'},
-//     {username: 'Bob', email: 'bob@projects.com', password: 'opensesame', name: 'Bob'}
+//     {username: 'admin', email: 'admin@admin.com', password: 'admin', name:'admin'},
+//     {username: 'enael', email: 'orelienmartin@hotmail.fr', password: 'password', name:'Enael'},
+//     {username: 'mordwen', email: 'orelienmartin@gmail.com', password: 'password', name: 'Mordwenss'}
 //   ], function(err, users) {
 //     if (err) throw(err);
 
