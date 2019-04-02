@@ -5,7 +5,7 @@ import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 
-const MainPage = ({trainingPageClick, onLoginClick, userToken}) => {
+const MainPage = ({trainingPageClick, onLoginClick, userToken, login}) => {
   const onTrainingPageClick = () => {
     trainingPageClick(userToken);
   }
@@ -22,11 +22,12 @@ const MainPage = ({trainingPageClick, onLoginClick, userToken}) => {
   );
 }
 
-// function mapStateToProps(state){
-//   return {
-//     userToken: state.user.token,
-//   }
-// }
+
+function mapStateToProps(state){
+  return{
+    login: state.user ? true : false
+  }
+}
 
 function mapDispatchToProps(dispatch){
   return{
@@ -64,4 +65,4 @@ function mapDispatchToProps(dispatch){
   }
 }
 
-export default connect(null, mapDispatchToProps)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

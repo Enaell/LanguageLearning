@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import '../css/App.css';
 import '../../bootstrap.min.css';
-import CardTrainingPage from './cardTraining/components/CardTrainingPage';
+import CardTrainingPage from './cardTraining/CardTrainingPage';
+import Navbar from './Navbar'
 import Footer from './Footer'
 import AddCardForm from './addCard/AddCardForm'
 import MainPage from './mainPage/MainPage'
@@ -11,6 +12,7 @@ import * as ReactRedux from 'react-redux';
 import reducer from '../redux/reducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
+
 import ReactDOM from 'react-dom';
 import { stat } from 'fs';
 
@@ -19,10 +21,12 @@ console.log(React.version);
 
 let store = Redux.createStore(reducer, composeWithDevTools());
 
+
 class App extends Component {
   render() {
     return (
       <ReactRedux.Provider store={store}>
+        <Navbar/>
         <div className="container-fluid" id="App">
           <BrowserRouter>
             <React.Fragment>
@@ -31,8 +35,9 @@ class App extends Component {
               <Route path="/addCard" component={AddCardForm} />
             </React.Fragment>
           </BrowserRouter>
-          <Footer />
+        <Footer />
         </div>
+
       </ReactRedux.Provider>
     );
   }

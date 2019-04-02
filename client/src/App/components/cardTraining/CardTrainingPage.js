@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
 import CharacterCard from './CharacterCard/CharacterCard';
 import TranslationList from './TranslationList/TranslationList';
 
-import '../css/cardTrainingPage.css'
+import '../../css/cardTrainingPage.css'
 
 
 const styles = theme => ({
@@ -121,7 +121,6 @@ function mapDispatchToProps(dispatch){
     getCards: () => {
       dispatch({type:'GET_CARDS'});
     }
-    
   }
 }
 

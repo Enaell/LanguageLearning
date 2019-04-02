@@ -80,7 +80,12 @@ function getTurnData(cards){
   }
 }
 
-function reducer(state, action)
+let initialState = {
+  user:{},
+  cards:[]
+};
+
+function reducer(state = initialState, action)
 {
   switch (action.type){
     case 'GET_CARDS':
@@ -95,7 +100,7 @@ function reducer(state, action)
         return Object.assign(
           {},
           state,
-          {user:{token: action.payload.id}}
+          {user:action.payload}
         );
     case 'ANSWER_SELECTED':
         const isCorrect = state.turnData.card.translations.some((tr) => tr === action.payload);
