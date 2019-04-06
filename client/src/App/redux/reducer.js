@@ -81,8 +81,12 @@ function getTurnData(cards){
 }
 
 let initialState = {
-  user:{},
-  cards:[]
+  user: {},
+  cards: [],
+  loginModal: {
+    open: false,
+    tab: 0,
+  }
 };
 
 function reducer(state = initialState, action)
@@ -94,6 +98,25 @@ function reducer(state = initialState, action)
           {},
           state,
           {cards: action.payload, turnData: getTurnData(action.payload), highlight:''},
+        )
+    case 'TOGGLE_LOGIN_MODAL':
+        return Object.assign(
+          {},
+          state,
+          {
+            loginModal: {
+              open: !state.loginModal.open,
+              tab: action.payload
+            }
+          }
+        )
+    case 'CHANGE_LOGIN_MODAL_TAB':
+        return Object.assign(
+          {},
+          state,
+          {
+            loginModal: Object.assign({}, state.loginModal, {tab: action.payload})  
+          }
         )
     case 'LOGIN':
         console.log(action.payload);
@@ -122,9 +145,8 @@ function reducer(state = initialState, action)
           {cards: state.cards.concat([action.card])}
         );
     case 'LOG_STATE':
-        console.log(state);
-        return state;
-          
+          console.log(state);
+          return state;    
     default:
       return state;
   }

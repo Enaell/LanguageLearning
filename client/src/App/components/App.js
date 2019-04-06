@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../css/App.css';
 import '../../bootstrap.min.css';
 import CardTrainingPage from './cardTraining/CardTrainingPage';
-import Navbar from './Navbar'
+import Navbar from './navbar/Navbar'
 import Footer from './Footer'
 import AddCardForm from './addCard/AddCardForm'
 import MainPage from './mainPage/MainPage'
@@ -12,12 +12,7 @@ import * as ReactRedux from 'react-redux';
 import reducer from '../redux/reducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-
-import ReactDOM from 'react-dom';
-import { stat } from 'fs';
-
 console.log(React.version);
-
 
 let store = Redux.createStore(reducer, composeWithDevTools());
 

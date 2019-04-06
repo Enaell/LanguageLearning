@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -118,9 +118,6 @@ function mapDispatchToProps(dispatch){
     onContinue: () => {
       dispatch({type: 'CONTINUE'});
     },
-    getCards: () => {
-      dispatch({type:'GET_CARDS'});
-    }
   }
 }
 

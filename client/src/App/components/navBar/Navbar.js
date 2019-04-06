@@ -15,7 +15,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { Button } from '@material-ui/core';
-
+import LoginModal from './LoginModal';
 
 const styles = theme => ({
   root: {
@@ -42,7 +42,7 @@ const styles = theme => ({
   },
 });
 
-const Navbar = ({user, onLoginClick, classes}) => {
+const Navbar = ({user, openLoginModal, openSigninModal, classes}) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -87,22 +87,26 @@ const Navbar = ({user, onLoginClick, classes}) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
+      {user.messages &&
+        <MenuItem>
+          <IconButton color="inherit">
+            <Badge badgeContent={4} color="secondary">
+              <MailIcon />
+            </Badge>
+          </IconButton>
+          <p>Messages</p>
+        </MenuItem>
+      }
+      {user.notifications &&
+        <MenuItem>
+          <IconButton color="inherit">
+            <Badge badgeContent={11} color="secondary">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+          <p>Notifications</p>
+        </MenuItem>
+      }
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton color="inherit">
           <AccountCircle />
@@ -124,35 +128,47 @@ const Navbar = ({user, onLoginClick, classes}) => {
           </Typography>
           <div className={classes.grow} />
           {user.id ? 
-          <div>
-          <div className={classes.sectionDesktop}>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton aria-haspopup="true" onClick={handleMobileMenuOpen} color="inherit">
-              <MoreIcon />
-            </IconButton>
-          </div>
-          </div>
+            <div>
+              <div className={classes.sectionDesktop}>
+                {user.messages &&
+                  <IconButton color="inherit">
+                    <Badge badgeContent={4} color="secondary">
+                      <MailIcon />
+                    </Badge>
+                  </IconButton>
+                }
+                {user.notifications &&  
+                  <IconButton color="inherit">
+                    <Badge badgeContent={17} color="secondary">
+                      <NotificationsIcon />
+                    </Badge>
+                  </IconButton>
+                  }
+                <IconButton
+                  aria-owns={isMenuOpen ? 'material-appbar' : undefined}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+              </div>
+              <div className={classes.sectionMobile}>
+                <IconButton aria-haspopup="true" onClick={handleMobileMenuOpen} color="inherit">
+                  <MoreIcon />
+                </IconButton>
+              </div>
+            </div>
           :
-          <Button onClick={onLoginClick} color="inherit">Login</Button>
+            <div>
+              <Button color="inherit" onClick={openLoginModal}>
+                Login
+              </Button>
+              <Button color="inherit" onClick={openSigninModal}>
+                Signin
+              </Button>
+              <LoginModal/>
+            </div>
           }
         </Toolbar>
       </AppBar>
@@ -164,27 +180,19 @@ const Navbar = ({user, onLoginClick, classes}) => {
 function mapStateToProps(state)
 {
   return {
-  user: state.user
+    user: state.user,
   }
+
 }
 
 function mapDispatchToProps(dispatch)
 {
   return {
-    onLoginClick:() => {
-      fetch("http://localhost:3000/api/customers/login",
-        {
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            method: "POST",
-            body: JSON.stringify({"username":"admin","password":"admin"})
-        })
-        .then((res) => {
-          return res.json();
-        })
-        .then((json) => dispatch({type: 'LOGIN', payload: json}));
+    openLoginModal:() => {
+      dispatch({type: 'TOGGLE_LOGIN_MODAL', payload:0})
+    },
+    openSigninModal:() => {
+      dispatch({type: 'TOGGLE_LOGIN_MODAL', payload:1})
     }
   }
 }

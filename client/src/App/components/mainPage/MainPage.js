@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core';
@@ -31,9 +31,9 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
   return{
-    trainingPageClick: () => {
+    trainingPageClick: (token) => {
       console.log('LOL');
-      fetch('http://localhost:3000/api/cards?access_token=',
+      fetch('http://localhost:3000/api/cards?access_token=' + token,
       {
         headers: {
           'Accept': 'application/json',
@@ -48,19 +48,7 @@ function mapDispatchToProps(dispatch){
       .then((json) => dispatch({type: 'GET_CARDS', payload: json}))
     },
     onLoginClick:() => {
-      fetch("http://localhost:3000/api/customers/login",
-        {
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            method: "POST",
-            body: JSON.stringify({"username":"admin","password":"admin"})
-        })
-        .then((res) => {
-          return res.json();
-        })
-        .then((json) => dispatch({type: 'LOGIN', payload: json}));
+      dispatch({type:'TOGGLE_LOGIN_MODAL'})
     }
   }
 }
