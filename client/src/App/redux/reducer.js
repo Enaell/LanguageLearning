@@ -86,6 +86,11 @@ let initialState = {
   loginModal: {
     open: false,
     tab: 0,
+  },
+  navSnackBar: {
+    open: false,
+    variant: 'success',
+    message: 'Success !'
   }
 };
 
@@ -104,10 +109,7 @@ function reducer(state = initialState, action)
           {},
           state,
           {
-            loginModal: {
-              open: !state.loginModal.open,
-              tab: action.payload
-            }
+            loginModal: Object.assign({}, state.loginModal,{open: !state.loginModal.open})
           }
         )
     case 'CHANGE_LOGIN_MODAL_TAB':
@@ -119,12 +121,33 @@ function reducer(state = initialState, action)
           }
         )
     case 'LOGIN':
-        console.log(action.payload);
         return Object.assign(
           {},
           state,
           {user:action.payload}
         );
+    case 'LOGOUT':
+        return Object.assign(
+          {},
+          state,
+          {user:{}}
+        );
+    case 'TOGGLE_NAV_SNACKBAR':
+        return Object.assign(
+          {}, 
+          state, 
+          {
+            navSnackBar: Object.assign({}, state.navSnackBar, {open: !state.navSnackBar.open})
+          }
+        );
+    case 'SET_NAV_SNACKBAR':
+        return Object.assign(
+          {},
+          state,
+          {
+            navSnackBar: Object.assign({}, state.navSnackBar, {variant: action.payload.variant, message: action.payload.message})  
+          }
+        )
     case 'ANSWER_SELECTED':
         const isCorrect = state.turnData.card.translations.some((tr) => tr === action.payload);
         return Object.assign(

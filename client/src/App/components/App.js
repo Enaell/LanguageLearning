@@ -3,7 +3,7 @@ import '../css/App.css';
 import '../../bootstrap.min.css';
 import CardTrainingPage from './cardTraining/CardTrainingPage';
 import Navbar from './navbar/Navbar'
-import Footer from './Footer'
+import Footer from './footer/Footer'
 import AddCardForm from './addCard/AddCardForm'
 import MainPage from './mainPage/MainPage'
 import { BrowserRouter, Route } from 'react-router-dom'

@@ -1,11 +1,12 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import LoginForm from './LoginForm'
+import SigninForm from './SigninForm'
 import { connect } from 'react-redux';
 
 
@@ -15,20 +16,16 @@ const LoginModal = ({onLogin, onSignin, closeModal, open, tabNumber, changeTabNu
     changeTabNumber(newValue);
   }
 
-  const [name, setName] = React.useState("");
   const [username, setUsername] = React.useState("");
   const [emailAddress, setEmailAddress] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  function handleNameChange(e){
-    setName(e.target.value);
-  }
 
   function handleUserNameChange(e){
     setUsername(e.target.value);
   }
 
-  function handleEmailAddressChange(e){
+  function handleEmailChange(e){
     setEmailAddress(e.target.value);
   }
 
@@ -37,12 +34,10 @@ const LoginModal = ({onLogin, onSignin, closeModal, open, tabNumber, changeTabNu
   }
 
   const onSigninClick = () => {
-    console.log('name : ' + name +'username : ' + username + 'emailAddress : ' + emailAddress + 'password' + password)
-    onSignin(name, username, emailAddress, password);
+    onSignin(username, emailAddress, password);
   }
 
   const onLoginClick = () => {
-    console.log('username : ' + username + 'emailAddress : ' + emailAddress + 'password' + password)
     onLogin(username, emailAddress, password);
   }
 
@@ -61,71 +56,19 @@ const LoginModal = ({onLogin, onSignin, closeModal, open, tabNumber, changeTabNu
               <Tab label="Signin"/>
             </Tabs>
             {tabNumber === 0 && 
-            <div>
-              <TextField
-                margin="dense"
-                id="email"
-                label="Email Address"
-                type="email"
-                onChange={handleNameChange}
-                fullWidth
-              />
-              <TextField
-                margin="dense"
-                id="userName"
-                label="User Name"
-                type="text"
-                onChange={handleUserNameChange}
-                fullWidth
-              />
-
-              <TextField
-                margin="dense"
-                id="password"
-                label="Password"
-                type="password"
-                onChange={handlePasswordChange}
-                fullWidth
-              />
-            </div>}
+              <LoginForm 
+                handleEmailChange = {handleEmailChange} 
+                handleUserNameChange = {handleUserNameChange} 
+                handlePasswordChange = {handlePasswordChange}>
+              </LoginForm>
+            }
             {tabNumber === 1 &&
-            <div>
-              <TextField
-                margin="dense"
-                id="name"
-                label="User Name"
-                type="text"
-                onChange={handleUserNameChange}
-                fullWidth
-              />
-              <TextField
-                required
-                margin="dense"
-                id="email"
-                label="Email Address"
-                type="email"
-                onChange={handleEmailAddressChange}
-                fullWidth
-              />
-              <TextField
-                required
-                margin="dense"
-                id="password"
-                label="Password"
-                type="password"
-                onChange={handlePasswordChange}
-                fullWidth
-              />
-              <TextField
-                required
-                margin="dense"
-                id="name"
-                label="name"
-                type="text"
-                onChange={handleNameChange}
-                fullWidth
-              />
-            </div>}
+              <SigninForm
+                handleEmailChange = {handleEmailChange} 
+                handleUserNameChange = {handleUserNameChange} 
+                handlePasswordChange = {handlePasswordChange}>
+              </SigninForm>
+            }
           </DialogContent>
           <DialogActions>
             <Button onClick={closeModal} color="primary">
@@ -151,7 +94,6 @@ function mapStateToProps(state)
     open: state.loginModal.open,
     tabNumber: state.loginModal.tab,
   }
-
 }
 
 function mapDispatchToProps(dispatch){
@@ -171,13 +113,26 @@ function mapDispatchToProps(dispatch){
           return res.json();
         })
         .then((json) => {
-          dispatch({type: 'LOGIN', payload: json});
-          dispatch({type: 'TOGGLE_LOGIN_MODAL', payload: 0});
+          if (json.error){
+            dispatch({type: 'TOGGLE_LOGIN_MODAL'});
+            dispatch({type: 'SET_NAV_SNACKBAR', payload: {variant: 'error', message: "Login Error !"}});
+            dispatch({type: 'TOGGLE_NAV_SNACKBAR'})
+          }
+          else
+          {
+            dispatch({type: 'LOGIN', payload: json});
+            dispatch({type: 'TOGGLE_LOGIN_MODAL'});
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+          dispatch({type: 'TOGGLE_LOGIN_MODAL'});
+          dispatch({type: 'SET_NAV_SNACKBAR', payload: {variant: 'error', message: "Login Error !"}});
+          dispatch({type: 'TOGGLE_NAV_SNACKBAR'})
         });
     },
-    onSignin:(name, username, emailAddress, password) => {
-
-      const signinBody =  {"name": name, "email": emailAddress, "username": username,"password": password};
+    onSignin:(username, emailAddress, password) => {
+      const signinBody =  {"name": username, "email": emailAddress, "username": username,"password": password};
       fetch("http://localhost:3000/api/customers",
         {
             headers: {
@@ -192,14 +147,14 @@ function mapDispatchToProps(dispatch){
         })
         .then((json) => {
           dispatch({type: 'LOGIN', payload: json});
-          dispatch({type: 'TOGGLE_LOGIN_MODAL', payload: 0});
+          dispatch({type: 'TOGGLE_LOGIN_MODAL'});
         });
     },
     changeTabNumber:(tabNumber) =>{
       dispatch({type: 'CHANGE_LOGIN_MODAL_TAB', payload: tabNumber});
     },
     closeModal:() => {
-      dispatch({type: 'TOGGLE_LOGIN_MODAL', payload: 0});
+      dispatch({type: 'TOGGLE_LOGIN_MODAL'});
     }
   }
 }

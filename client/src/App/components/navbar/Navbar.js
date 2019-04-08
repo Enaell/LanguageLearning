@@ -15,7 +15,8 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { Button } from '@material-ui/core';
-import LoginModal from './LoginModal';
+import LoginModal from './loginModal/LoginModal';
+import NavSnackBar from './NavSnackBar';
 
 const styles = theme => ({
   root: {
@@ -42,7 +43,7 @@ const styles = theme => ({
   },
 });
 
-const Navbar = ({user, openLoginModal, openSigninModal, classes}) => {
+const Navbar = ({user, openLoginModal, openSigninModal, onLogout, classes}) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -66,6 +67,11 @@ const Navbar = ({user, openLoginModal, openSigninModal, classes}) => {
     setMobileMoreAnchorEl(event.currentTarget);
   }
 
+  function handleLogout(event){
+    handleMenuClose();
+    onLogout(event.currentTarget);
+  }
+
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -74,6 +80,7 @@ const Navbar = ({user, openLoginModal, openSigninModal, classes}) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
@@ -174,8 +181,10 @@ const Navbar = ({user, openLoginModal, openSigninModal, classes}) => {
       </AppBar>
       {renderMenu}
       {renderMobileMenu}
+      <NavSnackBar></NavSnackBar>
     </div>
-  );}
+  );
+}
 
 function mapStateToProps(state)
 {
@@ -189,10 +198,29 @@ function mapDispatchToProps(dispatch)
 {
   return {
     openLoginModal:() => {
-      dispatch({type: 'TOGGLE_LOGIN_MODAL', payload:0})
+      dispatch({type: 'CHANGE_LOGIN_MODAL_TAB', payload: 0})
+      dispatch({type: 'TOGGLE_LOGIN_MODAL'})
     },
     openSigninModal:() => {
-      dispatch({type: 'TOGGLE_LOGIN_MODAL', payload:1})
+      dispatch({type: 'CHANGE_LOGIN_MODAL_TAB', payload: 1})
+      dispatch({type: 'TOGGLE_LOGIN_MODAL'})
+    },
+    onLogout:(token) => {
+      console.log('logout');
+      fetch("http://localhost:3000/api/customers/logout?access_token=" + token,
+      {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: "POST",
+          // body: JSON.stringify(signinBody)
+      })
+      .then(() => dispatch({type:'LOGOUT'}))
+      .catch((e) => {
+        console.log(e);
+        dispatch({type:'LOGOUT'});
+      })
     }
   }
 }
