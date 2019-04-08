@@ -13,12 +13,20 @@ import { connect } from 'react-redux';
 const LoginModal = ({onLogin, onSignin, closeModal, open, tabNumber, changeTabNumber}) => {
 
   function handleTabChange(event, newValue){
+    setUsernameError(false);
+    setPasswordError(false);
+    setEmailAddressError(false);
+
     changeTabNumber(newValue);
   }
 
   const [username, setUsername] = React.useState("");
   const [emailAddress, setEmailAddress] = React.useState("");
   const [password, setPassword] = React.useState("");
+
+  const [usernameError, setUsernameError] = React.useState(false);
+  const [emailAddressError, setEmailAddressError] = React.useState(false);
+  const [passwordError, setPasswordError] = React.useState(false);
 
 
   function handleUserNameChange(e){
@@ -34,11 +42,31 @@ const LoginModal = ({onLogin, onSignin, closeModal, open, tabNumber, changeTabNu
   }
 
   const onSigninClick = () => {
-    onSignin(username, emailAddress, password);
+
+    const usError = username === '';
+    const pError =  password === '';
+    const eaError = !emailAddress.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+
+    setUsernameError(usError);
+    setPasswordError(pError);
+    setEmailAddressError(eaError);
+
+    if (!(usError || pError || eaError))
+      onSignin(username, emailAddress, password);
   }
 
   const onLoginClick = () => {
-    onLogin(username, emailAddress, password);
+
+    const usError = !(username !== '' || emailAddress !== '');
+    const pError =  password === '';
+    const eaError = emailAddress !== '' && !emailAddress.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+
+    setUsernameError(usError);
+    setEmailAddressError(eaError);
+    setPasswordError(pError);
+
+    if (!(usError || pError || eaError))
+      onLogin(username, emailAddress, password);
   }
 
   return (
@@ -59,14 +87,22 @@ const LoginModal = ({onLogin, onSignin, closeModal, open, tabNumber, changeTabNu
               <LoginForm 
                 handleEmailChange = {handleEmailChange} 
                 handleUserNameChange = {handleUserNameChange} 
-                handlePasswordChange = {handlePasswordChange}>
+                handlePasswordChange = {handlePasswordChange}
+                passwordError = {passwordError}
+                emailAddressError = {emailAddressError}
+                usernameError = {usernameError}
+              >
               </LoginForm>
             }
             {tabNumber === 1 &&
               <SigninForm
                 handleEmailChange = {handleEmailChange} 
                 handleUserNameChange = {handleUserNameChange} 
-                handlePasswordChange = {handlePasswordChange}>
+                handlePasswordChange = {handlePasswordChange}
+                passwordError = {passwordError}
+                emailAddressError = {emailAddressError}
+                usernameError = {usernameError}
+              >
               </SigninForm>
             }
           </DialogContent>
@@ -146,9 +182,24 @@ function mapDispatchToProps(dispatch){
           return res.json();
         })
         .then((json) => {
-          dispatch({type: 'LOGIN', payload: json});
+          if (json.error){
+            dispatch({type: 'TOGGLE_LOGIN_MODAL'});
+            dispatch({type: 'SET_NAV_SNACKBAR', payload: {variant: 'error', message: "Signin Error !"}});
+            dispatch({type: 'TOGGLE_NAV_SNACKBAR'})
+          }
+          else
+          {
+            dispatch({type: 'LOGIN', payload: json});
+            dispatch({type: 'TOGGLE_LOGIN_MODAL'});
+          }
+        })
+        .catch((e) => {
+          console.log(e);
           dispatch({type: 'TOGGLE_LOGIN_MODAL'});
+          dispatch({type: 'SET_NAV_SNACKBAR', payload: {variant: 'error', message: "Signin Error !"}});
+          dispatch({type: 'TOGGLE_NAV_SNACKBAR'})
         });
+;
     },
     changeTabNumber:(tabNumber) =>{
       dispatch({type: 'CHANGE_LOGIN_MODAL_TAB', payload: tabNumber});

@@ -3,11 +3,13 @@ import { Column, Row } from 'simple-flexbox';
 import TextField from '@material-ui/core/TextField';
 
 
-const SigninForm = ({handleEmailChange, handleUserNameChange, handlePasswordChange}) => {
+const SigninForm = ({handleEmailChange, handleUserNameChange, handlePasswordChange, passwordError, usernameError, emailAddressError}) => {
   return(
     <Column>
     <Row horizontal='space-between'>
       <TextField
+        error = {usernameError}
+        helperText = {usernameError ? 'Please fill the username field' : null}       
         required
         margin="dense"
         id="name"
@@ -19,6 +21,8 @@ const SigninForm = ({handleEmailChange, handleUserNameChange, handlePasswordChan
     </Row>
     <Row>
       <TextField
+        error = {emailAddressError}
+        helperText = {emailAddressError ? 'Please fill the email field with a valid email address' : null} 
         required
         margin="dense"
         id="email"
@@ -30,6 +34,8 @@ const SigninForm = ({handleEmailChange, handleUserNameChange, handlePasswordChan
     </Row>
     <Row>
       <TextField
+        error = {passwordError}
+        helperText = {passwordError ? 'Please fill the password field' : null}
         required
         margin="dense"
         id="password"
