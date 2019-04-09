@@ -38,7 +38,7 @@ database model
                       "sentences": [{"cardLanguageSentence": string, "translatedSentence": string}],
                       "rank": number
                     }]
-    "vivibility": string  (this field is to differenciate cards validated by admin and cards add by a customer for his own dictionnary)
+    "visibility": string  (this field is to differenciate cards validated by admin and cards add by a customer for his own dictionnary)
   }
 
   cardList :
