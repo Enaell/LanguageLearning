@@ -1,5 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
@@ -99,20 +98,5 @@ function NavSnackBar({open, variant, message, closeSnackBar, classes}) {
   );
 }
 
-function mapStateToProps(state){
-  return {
-    open: state.navSnackBar.open,
-    variant: state.navSnackBar.variant,
-    message: state.navSnackBar.message
-  }
-}
 
-function mapDispatchToProps(dispatch){
-  return {
-    closeSnackBar: () => {
-      dispatch({type: 'TOGGLE_NAV_SNACKBAR'})
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps) (withStyles(styles) (NavSnackBar));
+export default withStyles(styles) (NavSnackBar);

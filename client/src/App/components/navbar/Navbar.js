@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes, { func } from 'prop-types';
-import {connect} from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -16,7 +15,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { Button } from '@material-ui/core';
 import LoginModal from './loginModal/LoginModal-container';
-import NavSnackBar from './NavSnackBar';
+import NavSnackBar from './navSnackBar/NavSnackBar-container';
 
 const styles = theme => ({
   root: {
@@ -186,43 +185,4 @@ const Navbar = ({user, openLoginModal, openSigninModal, onLogout, classes}) => {
   );
 }
 
-function mapStateToProps(state)
-{
-  return {
-    user: state.user,
-  }
-
-}
-
-function mapDispatchToProps(dispatch)
-{
-  return {
-    openLoginModal:() => {
-      dispatch({type: 'CHANGE_LOGIN_MODAL_TAB', payload: 0})
-      dispatch({type: 'TOGGLE_LOGIN_MODAL'})
-    },
-    openSigninModal:() => {
-      dispatch({type: 'CHANGE_LOGIN_MODAL_TAB', payload: 1})
-      dispatch({type: 'TOGGLE_LOGIN_MODAL'})
-    },
-    onLogout:(token) => {
-      console.log('logout');
-      fetch("http://localhost:3000/api/customers/logout?access_token=" + token,
-      {
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          method: "POST",
-          // body: JSON.stringify(signinBody)
-      })
-      .then(() => dispatch({type:'LOGOUT'}))
-      .catch((e) => {
-        console.log(e);
-        dispatch({type:'LOGOUT'});
-      })
-    }
-  }
-}
-
-export default connect (mapStateToProps, mapDispatchToProps)(withStyles(styles) (Navbar));
+export default withStyles(styles) (Navbar);

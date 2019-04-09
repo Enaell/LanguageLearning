@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../css/App.css';
 import '../../bootstrap.min.css';
 import CardTrainingPage from './cardTraining/CardTrainingPage';
-import Navbar from './navbar/Navbar'
+import Navbar from './navbar/Navbar-container'
 import Footer from './footer/Footer'
 import AddCardForm from './addCard/AddCardForm'
 import MainPage from './mainPage/MainPage'
