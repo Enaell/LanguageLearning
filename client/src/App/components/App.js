@@ -5,7 +5,7 @@ import CardTrainingPage from './cardTraining/CardTrainingPage';
 import Navbar from './navbar/Navbar-container'
 import Footer from './footer/Footer'
 import AddCardForm from './addCard/AddCardForm'
-import MainPage from './mainPage/MainPage'
+import MainPage from './mainPage/MainPage-container'
 import { BrowserRouter, Route } from 'react-router-dom'
 import * as Redux from 'redux';
 import * as ReactRedux from 'react-redux';
