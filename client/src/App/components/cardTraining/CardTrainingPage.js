@@ -4,10 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 
 import Link from 'react-router-dom/Link';
-import {connect} from 'react-redux';
 
-import CharacterCard from './CharacterCard/CharacterCard';
-import TranslationList from './TranslationList/TranslationList';
+import Turn from './turn/Turn';
 
 import '../../css/cardTrainingPage.css'
 
@@ -31,43 +29,6 @@ function Hero() {
     </div>
   );
 }
-
-function Turn(props) {
-  const {card, translations, highlight, onAnswerSelected} = props;
-
-  function highlightToBgColor(highlight){
-    const mapping = {
-      'none': '',
-      'correct': 'green',
-      'wrong': 'red',
-    }
-    return mapping[highlight];
-  }
-
-  return(
-    <div className="row turn" style={{backgroundColor:highlightToBgColor(highlight)}}>
-      <div className="col-4 offset-1">
-        <CharacterCard {...card}/>
-      </div>
-      <div className="col-6">
-        <TranslationList translations={translations} onAnswerSelected={onAnswerSelected} />
-      </div>
-    </div>
-  );
-}
-
-Turn.propTypes = {
-  card: PropTypes.shape({
-    character: PropTypes.string.isRequired,
-    pinying: PropTypes.string.isRequired,
-    translations: PropTypes.arrayOf(PropTypes.string).isRequired,
-    comments: PropTypes.string
-  }),
-  onAnswerSelected: PropTypes.func.isRequired,
-  translations: PropTypes.arrayOf(PropTypes.string).isRequired,
-  highlight: PropTypes.string.isRequired
-}
-
 
 function Continue({show, onContinue}) {
   return (
@@ -103,22 +64,4 @@ const CardTrainingPage = ({turnData, highlight, onAnswerSelected, classes, onCon
 
 
 
-function mapStateToProps(state){
-  return {
-    turnData: state.turnData,
-    highlight: state.highlight
-  }
-}
-
-function mapDispatchToProps(dispatch){
-  return{
-    onAnswerSelected: (payload) => { 
-      dispatch({type: 'ANSWER_SELECTED', payload});
-    },
-    onContinue: () => {
-      dispatch({type: 'CONTINUE'});
-    },
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps) (withStyles(styles)(CardTrainingPage));
+  export default withStyles(styles)(CardTrainingPage);

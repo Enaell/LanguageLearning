@@ -4,8 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { Card, CardContent } from '@material-ui/core';
 
 
-function CharacterCard(props) {
-  const {character, pinying} = props;
+function CharacterCard({character, pinying}) {
   
   return(
     <Card>

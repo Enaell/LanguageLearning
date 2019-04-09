@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../css/App.css';
 import '../../bootstrap.min.css';
-import CardTrainingPage from './cardTraining/CardTrainingPage';
+import CardTrainingPage from './cardTraining/CardTrainingPage-container';
 import Navbar from './navbar/Navbar-container'
 import Footer from './footer/Footer'
 import AddCardForm from './addCard/AddCardForm'
