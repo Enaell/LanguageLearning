@@ -1,22 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-
 import Link from 'react-router-dom/Link';
-
 import Turn from './turn/Turn';
-
 import '../../css/cardTrainingPage.css'
-
-
-const styles = theme => ({
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-  },
-});
 
 
 function Hero() {
@@ -62,6 +49,4 @@ const CardTrainingPage = ({turnData, highlight, onAnswerSelected, classes, onCon
     );
   }
 
-
-
-  export default withStyles(styles)(CardTrainingPage);
+  export default CardTrainingPage;

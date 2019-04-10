@@ -1,0 +1,10 @@
+{
+  "application-name": "Let's learn!",
+  "connection":{
+    "signin": "Signin",
+    "login": "Login"
+  },
+  "mainPage": {
+    "title": "Main Page"
+  }
+}

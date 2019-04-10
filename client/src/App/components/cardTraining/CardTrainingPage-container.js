@@ -1,5 +1,14 @@
 import {connect} from 'react-redux';
 import CardTrainingPage from './CardTrainingPage'
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+  root: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+  },
+});
 
 function mapStateToProps(state){
   return {
@@ -19,4 +28,4 @@ function mapDispatchToProps(dispatch){
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (CardTrainingPage);
+export default connect(mapStateToProps, mapDispatchToProps) (withStyles(styles)(CardTrainingPage));

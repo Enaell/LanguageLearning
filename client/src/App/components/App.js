@@ -10,9 +10,17 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import * as Redux from 'redux';
 import * as ReactRedux from 'react-redux';
 import reducer from '../redux/reducer';
+import counterpart from 'counterpart';
+import localeFr from '../locale/fr.json';
+import localeEn from '../locale/en.json';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 console.log(React.version);
+
+counterpart.registerTranslations('en', localeEn);
+counterpart.registerTranslations('fr', localeFr);
+
+counterpart.setLocale('fr');
 
 let store = Redux.createStore(reducer, composeWithDevTools());
 

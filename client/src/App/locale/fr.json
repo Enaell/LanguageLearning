@@ -1,0 +1,10 @@
+{
+  "application-name": "Let's learn !",
+  "connection":{
+    "signin": "s'enregistrer",
+    "login": "se connecter"
+  },
+  "mainPage": {
+    "title": "Page Principale"
+  }
+}

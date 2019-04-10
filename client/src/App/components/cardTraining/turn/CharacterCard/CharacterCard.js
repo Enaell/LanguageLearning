@@ -5,7 +5,6 @@ import { Card, CardContent } from '@material-ui/core';
 
 
 function CharacterCard({character, pinying}) {
-  
   return(
     <Card>
       <CardContent>

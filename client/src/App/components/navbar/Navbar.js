@@ -4,7 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import { withStyles } from '@material-ui/core/styles';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
@@ -16,31 +15,8 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import { Button } from '@material-ui/core';
 import LoginModal from './loginModal/LoginModal-container';
 import NavSnackBar from './navSnackBar/NavSnackBar-container';
+import translate from 'counterpart';
 
-const styles = theme => ({
-  root: {
-    width: '100%',
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
-});
 
 const Navbar = ({user, openLoginModal, openSigninModal, onLogout, classes}) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -130,7 +106,7 @@ const Navbar = ({user, openLoginModal, openSigninModal, onLogout, classes}) => {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-            Start Learning
+            {translate('application-name')}
           </Typography>
           <div className={classes.grow} />
           {user.id ? 
@@ -168,10 +144,10 @@ const Navbar = ({user, openLoginModal, openSigninModal, onLogout, classes}) => {
           :
             <div>
               <Button color="inherit" onClick={openLoginModal}>
-                Login
+                {translate('connection.login')}
               </Button>
               <Button color="inherit" onClick={openSigninModal}>
-                Signin
+                {translate('connection.signin')}
               </Button>
               <LoginModal/>
             </div>
@@ -185,4 +161,4 @@ const Navbar = ({user, openLoginModal, openSigninModal, onLogout, classes}) => {
   );
 }
 
-export default withStyles(styles) (Navbar);
+export default Navbar;

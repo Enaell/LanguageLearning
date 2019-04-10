@@ -1,5 +1,32 @@
 import { connect } from 'react-redux';
 import Navbar from './Navbar';
+import { withStyles } from '@material-ui/core/styles';
+
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+  sectionDesktop: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+    },
+  },
+  sectionMobile: {
+    display: 'flex',
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
+});
 
 function mapStateToProps(state)
 {
@@ -39,5 +66,4 @@ function mapDispatchToProps(dispatch)
   }
 }
 
-
-export default connect (mapStateToProps, mapDispatchToProps)(Navbar);
+export default connect (mapStateToProps, mapDispatchToProps)(withStyles(styles) (Navbar));
