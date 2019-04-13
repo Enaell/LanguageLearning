@@ -1,0 +1,135 @@
+import React from 'react';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import MailIcon from '@material-ui/icons/Mail';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import MoreIcon from '@material-ui/icons/MoreVert';
+import Badge from '@material-ui/core/Badge';
+
+
+const LogMenu = ({anchorEl, isMenuOpen, handleMenuClose, handleLogout}) => {
+  return (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    </Menu>
+  );
+};
+
+const LogMobileMenu = ({mobileMoreAnchorEl, isMobileMenuOpen, handleProfileMenuOpen, handleMobileMenuClose, user}) => {
+  return (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      {user.messages &&
+        <MenuItem>
+          <IconButton color="inherit">
+            <Badge badgeContent={4} color="secondary">
+              <MailIcon />
+            </Badge>
+          </IconButton>
+          <p>Messages</p>
+        </MenuItem>
+      }
+      {user.notifications &&
+        <MenuItem>
+          <IconButton color="inherit">
+            <Badge badgeContent={11} color="secondary">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+          <p>Notifications</p>
+        </MenuItem>
+      }
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton color="inherit">
+          <AccountCircle />
+        </IconButton>
+        <p>Profile</p>
+      </MenuItem>
+    </Menu>
+  );
+};
+
+const userBar = ({ user, onLogout, classes }) => {
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  
+  function handleProfileMenuOpen(event) {
+    setAnchorEl(event.currentTarget);
+  }
+  
+  function handleMobileMenuClose() {
+    setMobileMoreAnchorEl(null);
+  }
+  
+  function handleMenuClose() {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  }
+  
+  function handleMobileMenuOpen(event) {
+    setMobileMoreAnchorEl(event.currentTarget);
+  }
+  
+  function handleLogout(event){
+    handleMenuClose();
+    onLogout(event.currentTarget);
+  }
+  
+
+  return (
+    <div>
+      <div className={classes.sectionDesktop}>
+        {user.messages &&
+          <IconButton color="inherit">
+            <Badge badgeContent={4} color="secondary">
+              <MailIcon />
+            </Badge>
+          </IconButton>
+        }
+        {user.notifications &&  
+          <IconButton color="inherit">
+            <Badge badgeContent={17} color="secondary">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+          }
+        <IconButton
+          aria-owns={isMenuOpen ? 'material-appbar' : undefined}
+          aria-haspopup="true"
+          onClick={handleProfileMenuOpen}
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+        <LogMenu anchorEl isMenuOpen handleMenuClose handleLogout/>
+      </div>
+      <div className={classes.sectionMobile}>
+        <IconButton aria-haspopup="true" onClick={handleMobileMenuOpen} color="inherit">
+          <MoreIcon />
+        </IconButton>
+        <LogMobileMenu mobileMoreAnchorEl isMobileMenuOpen handleProfileMenuOpen handleMobileMenuClose user/>
+      </div>
+    </div>
+  )}
+
+export default userBar;
