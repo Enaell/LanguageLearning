@@ -4,15 +4,15 @@ import MainPage from './MainPage'
 
 function mapStateToProps(state){
   return{
-    login: state.user ? true : false
+    user: state.user
   }
 }
 
 function mapDispatchToProps(dispatch){
   return{
     trainingPageClick: (token) => {
-      console.log('LOL');
-      fetch('http://localhost:3000/api/cards?access_token=' + token,
+      const getCardUrl = token ? 'http://localhost:3000/api/cards?access_token=' + token : 'http://localhost:3000/api/cards';
+      fetch(getCardUrl,
       {
         headers: {
           'Accept': 'application/json',

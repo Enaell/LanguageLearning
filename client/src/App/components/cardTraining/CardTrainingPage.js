@@ -1,7 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
 import Paper from '@material-ui/core/Paper';
-import Link from 'react-router-dom/Link';
+import {Link} from 'react-router-dom';
 import Turn from './turn/Turn';
 import '../../css/cardTrainingPage.css'
 
@@ -29,10 +28,20 @@ function Continue({show, onContinue}) {
   )
 }
 
-const CardTrainingPage = ({turnData, highlight, onAnswerSelected, classes, onContinue}) => 
+const CardTrainingPage = ({turnData, highlight, user, onAnswerSelected, onContinue, getCards, classes }) => 
   {
+    console.log('card training');
+
+    useEffect(()=>{
+      console.log('use effect');
+      const token = user.id ? user.id : null;
+      getCards(token);
+      },[]);
+
     return (
       <React.Fragment>
+        {turnData &&
+        <div>
         <div className="row">
           <div className="col-8 offset-2 characterQuizz">
             <Hero />
@@ -45,6 +54,7 @@ const CardTrainingPage = ({turnData, highlight, onAnswerSelected, classes, onCon
         <div className="row">
           <Link to="/addCard"> Add a new Card</Link>
         </div>
+        </div>}
       </React.Fragment>
     );
   }

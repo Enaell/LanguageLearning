@@ -1,29 +1,46 @@
 {
-  "name": "customer",
-  "base": "User",
+  "name": "wordList",
+  "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
+    "language": {
+      "type": "string",
+      "required": true
+    },
     "name": {
       "type": "string",
       "required": true
     },
-    "email": {
+    "subject": {
+      "type": "string",
+      "required": true
+    },
+    "level": {
+      "type": "number",
+      "required": true,
+      "default": 1
+    },
+    "rank": {
+      "type": "number",
+      "default": 1
+    },
+    "comment": {
       "type": "string"
     }
   },
   "validations": [],
   "relations": {
-    "wordLists": {
-      "type": "hasMany",
-      "model": "wordList",
-      "foreignKey": ""
-    },
     "words": {
       "type": "hasMany",
       "model": "word",
+      "foreignKey": ""
+    },
+    "customer": {
+      "type": "belongsTo",
+      "model": "customer",
       "foreignKey": ""
     }
   },
@@ -31,19 +48,13 @@
     {
       "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "DENY"
     },
     {
-      "accessType": "*",
+      "accessType": "READ",
       "principalType": "ROLE",
-      "principalId": "$owner",
+      "principalId": "$everyone",
       "permission": "ALLOW"
     },
     {

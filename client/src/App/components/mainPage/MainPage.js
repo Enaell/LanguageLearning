@@ -1,14 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import translate from 'counterpart';
 
 
-const MainPage = ({trainingPageClick, onLoginClick, userToken}) => {
+const MainPage = ({trainingPageClick, onLoginClick, user}) => {
   const onTrainingPageClick = () => {
-    trainingPageClick(userToken);
+    const token = user.id ? user.id : null;
+    trainingPageClick(token);
   }
 
   return(

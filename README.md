@@ -26,26 +26,39 @@ If you want to restart the server, think about comment all the script to avoid c
 
 database model 
 
-  card :
+  word : HasMany translation (and EmbedsMany translation)
+  {
+    "spelling": string required,
+    "internationalSpelling": string required,
+    "language": string required
+    "translations": [{
+                      "word": string required,
+                      "internationalSpelling": string required,
+                      "language": string required
+                      "sentences": [{"cardLanguageSentence": string, "translatedSentence": string}],
+                      "rank": number
+                    }]
+    "comments": string
+    "validated": boolean (this field is to differenciate cards validated by admin from others)
+    "visibility": integer (rank of visibility wanted by the card owner)
+  }
+
+  translation: BelongsTo (or word EmbedsMany translation)  
   {
     "word": string required,
     "internationalSpelling": string required,
     "language": string required
-    "translations": [{
-                      "language": string required, 
-                      "word": string required, 
-                      "internationalSpelling": string required,
-                      "sentences": [{"cardLanguageSentence": string, "translatedSentence": string}],
-                      "rank": number
-                    }]
-    "visibility": string  (this field is to differenciate cards validated by admin and cards add by a customer for his own dictionnary)
+    "sentences": [{"cardLanguageSentence": string, "translatedSentence": string}],
+    "rank": number
   }
 
-  cardList :
+  wordList : HasMany word
   {	
     "language": string
     "name" : string, required
-    "exercices" : [{exerciseName: string, level: integer, rank: integer}] required,
+    "subject": string,
+    "level": number,
+    "rank": number,
     "comments" : string
   }
 

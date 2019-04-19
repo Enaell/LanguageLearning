@@ -13,14 +13,6 @@
       "./mixins"
     ]
   },
-  "card": {
-    "dataSource": "ZWXdb",
-    "public": true
-  },
-  "cardList": {
-    "dataSource": "ZWXdb",
-    "public": true
-  },
   "customer": {
     "dataSource": "ZWXdb",
     "public": true,
@@ -30,7 +22,7 @@
   },
   "User": {
     "dataSource": "ZWXdb",
-    "public": true,
+    "public": false,
     "options": {
       "strictObjectIDCoercion": true
     }
@@ -53,5 +45,17 @@
   "Role": {
     "dataSource": "ZWXdb",
     "public": false
+  },
+    "word": {
+    "dataSource": "ZWXdb",
+    "public": true
+  },
+  "wordList": {
+    "dataSource": "ZWXdb",
+    "public": true
+  },
+  "translation": {
+    "dataSource": "ZWXdb",
+    "public": true
   }
 }

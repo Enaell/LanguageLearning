@@ -1,13 +1,12 @@
 {
-  "name": "card",
-  "plural": "cards",
+  "name": "word",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "word": {
+    "spelling": {
       "type": "string",
       "required": true
     },
@@ -19,15 +18,33 @@
       "type": "string",
       "required": true
     },
-    "translations": {
-      "type": [
-        "object"
-      ],
-      "required": true
+    "comment": {
+      "type": "string"
+    },
+    "validated": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "visibility": {
+      "type": "number",
+      "required": true,
+      "default": 0
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "customer",
+      "foreignKey": ""
+    },
+    "translations": {
+      "type": "hasMany",
+      "model": "translation",
+      "foreignKey": ""
+    }
+  },
   "acls": [
     {
       "accessType": "*",

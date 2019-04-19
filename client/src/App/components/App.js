@@ -34,7 +34,7 @@ class App extends Component {
           <BrowserRouter>
             <React.Fragment>
               <Route exact path="/" component={MainPage}/>
-              <Route path="/cardTraining" render={() => <CardTrainingPage />} />
+              <Route path="/cardTraining" component={CardTrainingPage} />
               <Route path="/addCard" component={AddCardForm} />
             </React.Fragment>
           </BrowserRouter>

@@ -13,7 +13,8 @@ const styles = theme => ({
 function mapStateToProps(state){
   return {
     turnData: state.turnData,
-    highlight: state.highlight
+    highlight: state.highlight,
+    user: state.user
   }
 }
 
@@ -25,6 +26,23 @@ function mapDispatchToProps(dispatch){
     onContinue: () => {
       dispatch({type: 'CONTINUE'});
     },
+    getCards: (token) => {
+      console.log('inside getcards');
+      const getCardUrl = token ? 'http://localhost:3000/api/cards?access_token=' + token : 'http://localhost:3000/api/cards';
+      fetch(getCardUrl,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method:"GET"
+      })
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .then((json) => dispatch({type: 'GET_CARDS', payload: json}))
+    }
   }
 }
 
