@@ -3,9 +3,7 @@ module.exports = function(app) {
   var Role = app.models.Role;
   var RoleMapping = app.models.RoleMapping;
 
-
-  var TestUser = app.loopback.getModel('customer');
-  console.log(TestUser.settings.acls);
+  // Role.create({name: 'admin'});
 
   // User.create([
   //   {username: 'admin', email: 'admin@admin.com', password: 'admin', name:'admin'},
@@ -17,12 +15,12 @@ module.exports = function(app) {
   //   Role.find({where: {name: 'admin'}}, function(err, role) {
   //     if (err) {return console.log(err);}
     
-  //     console.log('ROLE :', role[0])
+  //     console.log('ROLE :', role)
 
   //     RoleMapping.create({
   //       principalType: "USER",
-  //       principalId: users[2].id,
   //       roleId: role[0].id
+  //       principalId: users[0].id,
   //     }, function(err, roleMapping) {
     
   //       if (err) {return console.log(err);}
@@ -35,6 +33,7 @@ module.exports = function(app) {
   //   });
 
   // });
+  
 
 };
 

@@ -26,7 +26,7 @@ If you want to restart the server, think about comment all the script to avoid c
 
 database model 
 
-  word : HasMany translation (and EmbedsMany translation)
+  word : HasMany translation
   {
     "spelling": string required,
     "internationalSpelling": string required,
@@ -43,15 +43,6 @@ database model
     "visibility": integer (rank of visibility wanted by the card owner)
   }
 
-  translation: BelongsTo (or word EmbedsMany translation)  
-  {
-    "word": string required,
-    "internationalSpelling": string required,
-    "language": string required
-    "sentences": [{"cardLanguageSentence": string, "translatedSentence": string}],
-    "rank": number
-  }
-
   wordList : HasMany word
   {	
     "language": string
@@ -62,7 +53,7 @@ database model
     "comments" : string
   }
 
-  user:
+  customer:
   {
     "name": string required,
     "email": string required,

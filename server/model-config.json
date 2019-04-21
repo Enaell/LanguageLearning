@@ -13,6 +13,14 @@
       "./mixins"
     ]
   },
+  "word": {
+    "dataSource": "ZWXdb",
+    "public": true
+  },
+  "wordList": {
+    "dataSource": "ZWXdb",
+    "public": true
+  },
   "customer": {
     "dataSource": "ZWXdb",
     "public": true,
@@ -22,14 +30,21 @@
   },
   "User": {
     "dataSource": "ZWXdb",
-    "public": false,
+    "public": true,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "AccessToken": {
     "dataSource": "ZWXdb",
-    "public": false
+    "public": false,
+    "relations": {
+      "user": {
+        "type": "belongsTo",
+        "model": "customer",
+        "foreignKey": "userId"
+      }
+    }
   },
   "ACL": {
     "dataSource": "ZWXdb",
@@ -45,17 +60,5 @@
   "Role": {
     "dataSource": "ZWXdb",
     "public": false
-  },
-    "word": {
-    "dataSource": "ZWXdb",
-    "public": true
-  },
-  "wordList": {
-    "dataSource": "ZWXdb",
-    "public": true
-  },
-  "translation": {
-    "dataSource": "ZWXdb",
-    "public": true
   }
 }

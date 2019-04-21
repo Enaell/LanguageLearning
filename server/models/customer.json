@@ -9,31 +9,22 @@
     "name": {
       "type": "string",
       "required": true
-    },
-    "email": {
-      "type": "string"
     }
   },
   "validations": [],
   "relations": {
-    "wordLists": {
-      "type": "hasMany",
-      "model": "wordList",
-      "foreignKey": ""
-    },
     "words": {
       "type": "hasMany",
       "model": "word",
       "foreignKey": ""
+    },
+    "wordLists": {
+      "type": "hasMany",
+      "model": "wordList",
+      "foreignKey": ""
     }
   },
   "acls": [
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "admin",
-      "permission": "ALLOW"
-    },
     {
       "accessType": "*",
       "principalType": "ROLE",
