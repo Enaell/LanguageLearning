@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import Navbar from './Navbar';
 import { withStyles } from '@material-ui/core/styles';
 
-
 const styles = theme => ({
   root: {
     width: '100%',
@@ -33,7 +32,7 @@ function mapDispatchToProps(dispatch)
     openSigninModal:() => {
       dispatch({type: 'CHANGE_LOGIN_MODAL_TAB', payload: 1})
       dispatch({type: 'TOGGLE_LOGIN_MODAL'})
-    }
+    },
   }
 }
 
