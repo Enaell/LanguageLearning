@@ -6,5 +6,8 @@
   },
   "mainPage": {
     "title": "Main Page"
+  },
+  "dictionaryPage": {
+    "title": "Dictionary"
   }
 }

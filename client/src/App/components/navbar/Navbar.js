@@ -9,16 +9,12 @@ import LoginModal from './loginModal/LoginModal-container';
 import NavSnackBar from './navSnackBar/NavSnackBar-container';
 import UserBar from './userBar/UserBar-container'
 import translate from 'counterpart';
-import { Redirect } from 'react-router';
 import { withRouter } from "react-router-dom";
-import {Link} from 'react-router-dom';
 
 
 
 const Navbar = ({user, openLoginModal, openSigninModal, classes, history}) => {
 
-  const [redirect, setRedirect] = React.useState(false);
-  
   const handleSideMenuClick = () => {}
 
   const handleOnMainPageRedirectionClick = () => {
@@ -27,16 +23,16 @@ const Navbar = ({user, openLoginModal, openSigninModal, classes, history}) => {
 
    return(
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color='primary'>
         <Toolbar>
           <IconButton onClick={handleSideMenuClick} className={classes.menuButton} color="inherit" aria-label="Open drawer">
             <MenuIcon />
           </IconButton>
-          <Link onClick={handleOnMainPageRedirectionClick}>
-            <Typography style={{color: '#FFFFFF'}} variant="h6" noWrap>
+          <Button color='inherit' className={classes.homeButton} onClick={handleOnMainPageRedirectionClick}>
+            <Typography style={{color: '#fff'}} variant="h6" noWrap>
               {translate('application-name')}
             </Typography>
-          </Link>
+          </Button>
           <div className={classes.grow} />
           {user.id ? 
             <UserBar/>
@@ -54,7 +50,6 @@ const Navbar = ({user, openLoginModal, openSigninModal, classes, history}) => {
         </Toolbar>
       </AppBar>
       <NavSnackBar></NavSnackBar>
-      {redirect && <Redirect to='/'/>}
     </div>
   );
 }

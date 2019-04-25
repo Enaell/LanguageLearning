@@ -1,5 +1,5 @@
 import {shuffle, sample} from 'underscore';
-
+import theme from '../theme';
 
 function getCards(){
 
@@ -91,7 +91,8 @@ let initialState = {
     open: false,
     variant: 'success',
     message: 'Success !'
-  }
+  },
+  theme: theme
 };
 
 function reducer(state = initialState, action)

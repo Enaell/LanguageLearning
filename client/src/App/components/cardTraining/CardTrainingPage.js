@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import Paper from '@material-ui/core/Paper';
 import {Link} from 'react-router-dom';
 import Turn from './turn/Turn';
-import '../../css/cardTrainingPage.css'
-
 
 function Hero() {
   return (
