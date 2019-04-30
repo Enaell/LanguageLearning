@@ -30,7 +30,8 @@ database model
   {
     "spelling": string required,
     "internationalSpelling": string required,
-    "language": string required
+    "language": string required,
+    "subject": [string]
     "translations": [{
                       "word": string required,
                       "internationalSpelling": string required,
@@ -47,7 +48,7 @@ database model
   {	
     "language": string
     "name" : string, required
-    "subject": string,
+    "subject": [string],
     "level": number,
     "rank": number,
     "comments" : string
@@ -60,3 +61,62 @@ database model
     "username": string required,
     "password": string required
   }
+
+
+word examples : 
+{
+  "name": "吃",
+  "globalName": "chi",
+  "language": "cn",
+  "translations": [
+    {
+      "name": "manger",
+      "globalName": "manger",
+      "language": "fr",
+      "sentences": [{"sentence": "我吃", "translatedSentence": "je mange"}],
+      "rank": 0
+    }
+  ],
+  level: number,
+  "validated": false,
+  "visibility": 0
+},
+{
+  "name": "喝",
+  "globalName": "he",
+  "language": "cn",
+  "translations": [
+    {
+      "name": "boire",
+      "globalName": "boire",
+      "language": "fr",
+      "sentences": [{"sentence": "你渴那喝", "translatedSentence": "si tu as soif, bois"}],
+      "rank": 0
+    }
+  ],
+  "validated": false,
+  "visibility": 0
+},
+{
+  "name": "天",
+  "globalName": "tian",
+  "language": "cn",
+  "translations": [
+    {
+      "name": "jour",
+      "globalName": "jour",
+      "language": "fr",
+      "sentences": [{"sentence": "还有三天后就是我的生日", "translatedSentence": "encore trois jours avant mon anniversaire"}],
+      "rank": 0
+    },
+    {
+      name": "ciel",
+      "globalName": "ciel",
+      "language": "fr",
+      "sentences": [{"sentence": "天的儿子", "translatedSentence": "le fils du ciel"}],
+      "rank": 0
+    }
+  ],
+  "validated": false,
+  "visibility": 0
+}

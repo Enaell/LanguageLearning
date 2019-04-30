@@ -5,19 +5,12 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import LoginForm from './LoginForm'
-import SigninForm from './SigninForm'
+import LoginForm from './LoginForm';
+import SigninForm from './SigninForm';
+import translate from 'counterpart';
 
 
 const LoginModal = ({onLogin, onSignin, closeModal, open, tabNumber, changeTabNumber}) => {
-
-  function handleTabChange(event, newValue){
-    setUsernameError(false);
-    setPasswordError(false);
-    setEmailAddressError(false);
-
-    changeTabNumber(newValue);
-  }
 
   const [username, setUsername] = React.useState("");
   const [emailAddress, setEmailAddress] = React.useState("");
@@ -67,6 +60,15 @@ const LoginModal = ({onLogin, onSignin, closeModal, open, tabNumber, changeTabNu
       onLogin(username, emailAddress, password);
   }
 
+  function handleTabChange(event, newValue){
+    setUsernameError(false);
+    setPasswordError(false);
+    setEmailAddressError(false);
+
+    changeTabNumber(newValue);
+  }
+
+
   return (
     <div>
       <Dialog open={open} onClose={closeModal} aria-labelledby="form-dialog-title">
@@ -78,8 +80,8 @@ const LoginModal = ({onLogin, onSignin, closeModal, open, tabNumber, changeTabNu
               textColor="primary"
               centered
             >
-              <Tab label="Login"/>
-              <Tab label="Signin"/>
+              <Tab label={translate('connection.login')}/>
+              <Tab label={translate('connection.signin')}/>
             </Tabs>
             {tabNumber === 0 && 
               <LoginForm 
@@ -110,11 +112,11 @@ const LoginModal = ({onLogin, onSignin, closeModal, open, tabNumber, changeTabNu
             </Button>
             {tabNumber === 0 && 
             <Button onClick={onLoginClick} color="primary">
-              Login
+              {translate('connection.login')}
             </Button>}
             {tabNumber === 1 && 
             <Button onClick={onSigninClick} color="primary">
-              Signin
+              {translate('connection.signin')}
             </Button>}
           </DialogActions>
       </Dialog>

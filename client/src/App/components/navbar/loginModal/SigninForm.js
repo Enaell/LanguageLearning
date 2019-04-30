@@ -1,6 +1,7 @@
 import React from 'react';
 import { Column, Row } from 'simple-flexbox';
 import TextField from '@material-ui/core/TextField';
+import translate from 'counterpart';
 
 
 const SigninForm = ({handleEmailChange, handleUserNameChange, handlePasswordChange, passwordError, usernameError, emailAddressError}) => {
@@ -9,7 +10,7 @@ const SigninForm = ({handleEmailChange, handleUserNameChange, handlePasswordChan
     <Row horizontal='space-between'>
       <TextField
         error = {usernameError}
-        helperText = {usernameError ? 'Please fill the username field' : null}       
+        helperText = {usernameError ? translate('connection.usernameError') : null}       
         required
         margin="dense"
         id="name"
@@ -22,7 +23,7 @@ const SigninForm = ({handleEmailChange, handleUserNameChange, handlePasswordChan
     <Row>
       <TextField
         error = {emailAddressError}
-        helperText = {emailAddressError ? 'Please fill the email field with a valid email address' : null} 
+        helperText = {emailAddressError ? translate('connection.emailError') : null} 
         required
         margin="dense"
         id="email"
@@ -35,7 +36,7 @@ const SigninForm = ({handleEmailChange, handleUserNameChange, handlePasswordChan
     <Row>
       <TextField
         error = {passwordError}
-        helperText = {passwordError ? 'Please fill the password field' : null}
+        helperText = {passwordError ? translate('connection.passwordError') : null}
         required
         margin="dense"
         id="password"

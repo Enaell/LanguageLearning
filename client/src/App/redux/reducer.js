@@ -82,7 +82,7 @@ function getTurnData(cards){
 
 let initialState = {
   user: {},
-  cards: [],
+  dictionary: [],
   loginModal: {
     open: false,
     tab: 0,
@@ -98,13 +98,12 @@ let initialState = {
 function reducer(state = initialState, action)
 {
   switch (action.type){
-    case 'GET_CARDS':
-        console.log('Get cards');
+    case 'GET_WORDS':
         return Object.assign(
           {},
           state,
-          {cards: getCards(), turnData: getTurnData(getCards()), highlight:''},
-//          {cards: action.payload, turnData: getTurnData(action.payload), highlight:''},
+//          {cards: getCards(), turnData: getTurnData(getCards()), highlight:''},
+          {dictionary: action.payload.sort((a, b) => {return a.globalName > b.globalName;})}
         )
     case 'TOGGLE_LOGIN_MODAL':
         return Object.assign(

@@ -28,10 +28,7 @@ function Continue({show, onContinue}) {
 
 const CardTrainingPage = ({turnData, highlight, user, onAnswerSelected, onContinue, getCards, classes }) => 
   {
-    console.log('card training');
-
     useEffect(()=>{
-      console.log('use effect');
       const token = user.id ? user.id : null;
       getCards(token);
       },[]);
