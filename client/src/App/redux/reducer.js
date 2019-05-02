@@ -99,11 +99,12 @@ function reducer(state = initialState, action)
 {
   switch (action.type){
     case 'GET_WORDS':
+        console.log('get words action !')
         return Object.assign(
           {},
           state,
 //          {cards: getCards(), turnData: getTurnData(getCards()), highlight:''},
-          {dictionary: action.payload.sort((a, b) => {return a.globalName > b.globalName;})}
+          {dictionary: action.payload.sort((a, b) => {return a.globalName > b.globalName;}) || []}
         )
     case 'TOGGLE_LOGIN_MODAL':
         return Object.assign(
