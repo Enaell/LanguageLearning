@@ -30,8 +30,7 @@ const DictionaryTabs = ({dictionary}) =>{
         <Tab label={translate('dictionaryPage.alphabeticOrder')}/>
         <Tab label={translate('dictionaryPage.subject')}/>
       </Tabs>
-      {tabNumber === 0 && 
-      
+      {tabNumber === 0 && dictionary && 
         <AlphabeticOrderList dictionary={dictionary} />
       }
       {tabNumber === 1 &&
