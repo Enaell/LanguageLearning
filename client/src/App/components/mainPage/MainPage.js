@@ -3,7 +3,7 @@ import { Button } from '@material-ui/core';
 import translate from 'counterpart';
 import { Column } from 'simple-flexbox';
 import { withRouter } from "react-router-dom";
-import  {PageTitle, PageDescription}  from '../common/GenericPageComponents'
+import  {PageTitle, PageDescription}  from 'App/components/common/GenericPageComponents'
 
 
 const MainPage = ({ onLoginClick, history}) => {

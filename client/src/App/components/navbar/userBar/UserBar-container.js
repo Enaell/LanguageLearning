@@ -27,7 +27,6 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   return{
     onLogout:(token) => {
-      console.log('logout');
       fetch("http://localhost:3000/api/customers/logout?access_token=" + token,
       {
           headers: {

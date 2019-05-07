@@ -99,7 +99,6 @@ function reducer(state = initialState, action)
 {
   switch (action.type){
     case 'GET_WORDS':
-        console.log('get words action !')
         return Object.assign(
           {},
           state,

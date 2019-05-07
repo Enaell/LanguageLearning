@@ -11,7 +11,6 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   return{
     getAllWords: (language, token) => {
-      console.log('inside getcards');
       const getWordUrl = token ? 'http://localhost:3000/api/words?access_token=' + token : 'http://localhost:3000/api/words';
       fetch(getWordUrl,
       {
@@ -22,7 +21,6 @@ function mapDispatchToProps(dispatch){
         method:"GET"
       })
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .then((json) => dispatch({type: 'GET_WORDS', payload: json}))

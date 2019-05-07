@@ -27,7 +27,6 @@ function mapDispatchToProps(dispatch){
       dispatch({type: 'CONTINUE'});
     },
     getCards: (token) => {
-      console.log('inside getcards');
       const getCardUrl = token ? 'http://localhost:3000/api/cards?access_token=' + token : 'http://localhost:3000/api/cards';
       fetch(getCardUrl,
       {
@@ -38,7 +37,6 @@ function mapDispatchToProps(dispatch){
         method:"GET"
       })
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .then((json) => dispatch({type: 'GET_CARDS', payload: json}))

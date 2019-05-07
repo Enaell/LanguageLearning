@@ -3,8 +3,6 @@ import DictionaryTabs from './DictionaryTabs';
 
 
 function mapStateToProps(state){
-  console.log('dictionary in mapstatetoprops');
-  console.log(state.dictionary)
   return {
     dictionary: state.dictionary
   }

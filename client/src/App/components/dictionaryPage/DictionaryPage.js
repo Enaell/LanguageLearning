@@ -4,10 +4,10 @@ import translate from 'counterpart';
 import  {PageTitle, PageDescription}  from '../common/GenericPageComponents';
 import DictionaryTabs from './tabs/DictionaryTabs-container'
 
+
 const DictionaryPage = ({user, getAllWords}) => {
 
   useEffect(()=>{
-    console.log('aaaa')
     const token = user.id ? user.id : null;
     getAllWords('cn', token);
     },[]);
