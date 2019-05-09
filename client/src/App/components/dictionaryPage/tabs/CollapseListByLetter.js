@@ -4,7 +4,7 @@ import { Typography } from '@material-ui/core';
 import { Column } from 'simple-flexbox'
 import { WordList } from 'App/components/common/WordListComponents'
 
-const CollapseListByLetter = ({style, letter, wordListByFirstLetter}) => {
+const CollapseListByLetter = ({horizontal, style, letter, wordListByFirstLetter}) => {
   
   const [switchValue, setSwitchValue] = useState(false);
   const handleSwitchChange = () => (setSwitchValue(!switchValue));
@@ -27,7 +27,7 @@ const CollapseListByLetter = ({style, letter, wordListByFirstLetter}) => {
   console.log(wordListByFirstLetter);
 
   return (
-    <Column style={style}>
+    <Column horizontal={horizontal} style={style}>
       <Typography style={{cursor: 'pointer'}} onClick={handleSwitchChange} variant="h5">{letter}</Typography>
       <Collapse in={switchValue}>
         <WordList wordList={wordListByFirstLetter} handleToggle={handleToggle} checked={checked}/>
