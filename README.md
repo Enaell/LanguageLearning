@@ -68,6 +68,7 @@ word examples :
   "name": "吃",
   "globalName": "chi",
   "language": "cn",
+  "subject": ["dailyLife", "general"],
   "translations": [
     {
       "name": "manger",
@@ -77,7 +78,7 @@ word examples :
       "rank": 0
     }
   ],
-  level: number,
+  "level": 0,
   "validated": false,
   "visibility": 0
 },
@@ -85,6 +86,7 @@ word examples :
   "name": "喝",
   "globalName": "he",
   "language": "cn",
+  "subject": ["dailyLife", "general"]
   "translations": [
     {
       "name": "boire",
@@ -94,6 +96,7 @@ word examples :
       "rank": 0
     }
   ],
+  "level": 0,
   "validated": false,
   "visibility": 0
 },
@@ -101,6 +104,7 @@ word examples :
   "name": "天",
   "globalName": "tian",
   "language": "cn",
+  "subject": ["dailyLife", "general", "time"],
   "translations": [
     {
       "name": "jour",
@@ -117,6 +121,25 @@ word examples :
       "rank": 0
     }
   ],
+  "level": 0,
   "validated": false,
   "visibility": 0
-}
+},
+{
+  "name": "茶",
+  "globalName": "cha",
+  "language": "cn",
+  "subject": ["food"],
+  "translations": [
+    {
+      "name": "thé",
+      "globalName": "thé",
+      "language": "fr",
+      "sentences": [{"sentence": "我要喝茶", "translatedSentence": "j\'ai envie de boire du thé"}],
+      "rank": 0
+    }
+  ],
+  "level": 0,
+  "validated": false,
+  "visibility": 0
+},

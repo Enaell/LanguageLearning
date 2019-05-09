@@ -3,15 +3,14 @@ import { Column } from 'simple-flexbox';
 import translate from 'counterpart';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
 import OrderList from './OrderList';
 
 const firstLetterSortedDictionary = (dictionary) => {
-
+  
   let sortedDictionary = {}
 
-  dictionary.map(word => {
-    if (!(sortedDictionary.keys && sortedDictionary.keys.includes(word.globalName.charAt(0))))
+  dictionary.forEach(word => {
+    if (!sortedDictionary.hasOwnProperty(word.globalName.charAt(0)))
       sortedDictionary[word.globalName.charAt(0)] = [];
     sortedDictionary[word.globalName.charAt(0)].push(word);
   });
@@ -21,12 +20,14 @@ const firstLetterSortedDictionary = (dictionary) => {
 const subjectSortedDictionary = (dictionary) => {
 
   let sortedDictionary = {}
-
-  dictionary.map(word => {
-    if (!(sortedDictionary.keys && sortedDictionary.keys.includes(word.subject)))
-      sortedDictionary[word.subject] = [];
-    sortedDictionary[word.subject].push(word);
-  });
+  
+  dictionary.forEach(word => {
+    (word.subject).forEach(subject => {
+      if (!sortedDictionary.hasOwnProperty(subject))
+        sortedDictionary[subject] = [];
+      sortedDictionary[subject].push(word);
+    });
+  })
   return sortedDictionary;
 }
 
@@ -39,8 +40,7 @@ const DictionaryTabs = ({dictionary}) =>{
     setTabNumber(newValue);
   }
 
-
-  return(
+  return (
     <Column>
       <Tabs
       style={{width: '1150px'}}
@@ -57,7 +57,7 @@ const DictionaryTabs = ({dictionary}) =>{
         <OrderList dictionary={dictionary} sortedDictionary={firstLetterSortedDictionary} />
       }
       {tabNumber === 1 &&
-        <Typography variant="h3" color={'primary'} >tab 1</Typography>
+        <OrderList dictionary={dictionary} sortedDictionary={subjectSortedDictionary} />
       }
     </Column>
   )

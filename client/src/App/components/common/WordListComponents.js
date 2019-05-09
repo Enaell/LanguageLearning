@@ -14,11 +14,14 @@ export const wordItem = () => {
 
 const translationList = (translations) => {
   let s = '';
-  translations.forEach(translation => {
-    s += translation.name;
+  translations.forEach((translation, i, translations) => {
+    if (Object.is(translations.length - 1, i))
+      s += translation.name;
+    else
+      s += (translation.name + ', ');
   })
   return s;
-} 
+}
 
 export const WordList = ({wordList, handleToggle, checked}) => {
   return (
