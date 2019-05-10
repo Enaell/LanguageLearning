@@ -1,17 +1,17 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import CollapseListByLetter from './CollapseListByLetter';
+import CollapseList from './collapseList/CollapseList-container';
 import { Row } from 'simple-flexbox'
 
-const OrderList = ({dictionary, sortedDictionary}) => {
+const OrderList = ({dictionary, sortDictionary}) => {
 
-  const [listOfWords, setlistOfWords] = useState(sortedDictionary(dictionary));
+  const [listOfWords, setlistOfWords] = useState(sortDictionary(dictionary));
 
-  useEffect(() => setlistOfWords(sortedDictionary(dictionary)), [dictionary])
+  useEffect(() => setlistOfWords(sortDictionary(dictionary)), [dictionary])
 
   return (
     <Row wrap horizontal='start' style={{maxWidth: '1150px', marginTop: '50px'}}>
-      {listOfWords && Object.keys(listOfWords).length > 0 && Object.keys(listOfWords).map((listByFirstLetter) =>(
-        <CollapseListByLetter horizontal='center' style={{ margin: '15px'}} key={listByFirstLetter} letter={listByFirstLetter} wordListByFirstLetter={listOfWords[listByFirstLetter]} />
+      {listOfWords && Object.keys(listOfWords).length > 0 && Object.keys(listOfWords).map((key) =>(
+        <CollapseList horizontal='center' style={{ margin: '15px'}} key={key} listTitle={key} wordList={listOfWords[key]} />
       ))}
     </Row>
   )

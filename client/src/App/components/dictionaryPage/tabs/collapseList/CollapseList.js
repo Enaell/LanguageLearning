@@ -2,14 +2,16 @@ import React, {useState} from 'react';
 import Collapse from '@material-ui/core/Collapse';
 import { Typography } from '@material-ui/core';
 import { Column } from 'simple-flexbox'
-import { WordList } from 'App/components/common/WordListComponents'
+import { WordList } from './WordList'
 
-const CollapseListByLetter = ({horizontal, style, letter, wordListByFirstLetter}) => {
+const CollapseList = ({horizontal, style, listTitle, wordList, updateSelectedWords}) => {
   
+  // Add check to words present in redux selected list
+
   const [switchValue, setSwitchValue] = useState(false);
   const handleSwitchChange = () => (setSwitchValue(!switchValue));
 
-  const [checked, setChecked] = React.useState([0]);
+  const [checked, setChecked] = React.useState([]);
 
   const handleToggle = value => () => {
     const currentIndex = checked.indexOf(value);
@@ -21,19 +23,25 @@ const CollapseListByLetter = ({horizontal, style, letter, wordListByFirstLetter}
       newChecked.splice(currentIndex, 1);
     }
 
+    updateSelectedWords(wordList[value])
     setChecked(newChecked);
   };
 
-  console.log(wordListByFirstLetter);
-
+  const getWordChecked = () => {
+    checked.map(value => {
+      return wordList[value]} );
+  }
+  
+  React.useEffect(() => getWordChecked());
+  
   return (
     <Column horizontal={horizontal} style={style}>
-      <Typography style={{cursor: 'pointer'}} onClick={handleSwitchChange} variant="h5">{letter}</Typography>
+      <Typography style={{cursor: 'pointer'}} onClick={handleSwitchChange} variant="h5">{listTitle}</Typography>
       <Collapse in={switchValue}>
-        <WordList wordList={wordListByFirstLetter} handleToggle={handleToggle} checked={checked}/>
+        <WordList wordList={wordList} handleToggle={handleToggle} checked={checked}/>
       </Collapse>
     </Column>
   )
 }
 
-export default CollapseListByLetter;
+export default CollapseList;

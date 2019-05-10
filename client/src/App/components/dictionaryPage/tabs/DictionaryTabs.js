@@ -54,10 +54,10 @@ const DictionaryTabs = ({dictionary}) =>{
         <Tab label={translate('dictionaryPage.subject')}/>
       </Tabs>
       {tabNumber === 0 && dictionary && 
-        <OrderList dictionary={dictionary} sortedDictionary={firstLetterSortedDictionary} />
+        <OrderList dictionary={dictionary} sortDictionary={firstLetterSortedDictionary} />
       }
       {tabNumber === 1 &&
-        <OrderList dictionary={dictionary} sortedDictionary={subjectSortedDictionary} />
+        <OrderList dictionary={dictionary} sortDictionary={subjectSortedDictionary} />
       }
     </Column>
   )

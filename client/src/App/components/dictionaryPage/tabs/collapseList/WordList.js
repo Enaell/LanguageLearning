@@ -1,6 +1,4 @@
 import React from 'react';
-import { Column } from 'simple-flexbox';
-import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
@@ -30,7 +28,7 @@ export const WordList = ({wordList, handleToggle, checked}) => {
       return(
         <ListItem style={{minWidth: '350px'}} key={value} role={undefined} button onClick={handleToggle(value)}>
           <Checkbox color={'primary'} checked={checked.indexOf(value) !== -1} tabIndex={-1} disableRipple />
-          <ListItemText 
+          <ListItemText
             style={{paddingRight: '30px'}} 
             primary={`${wordList[value].name} - ${wordList[value].globalName}`}
             primaryTypographyProps={{variant:'body1'}}
