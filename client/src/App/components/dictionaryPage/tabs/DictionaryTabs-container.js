@@ -4,7 +4,7 @@ import DictionaryTabs from './DictionaryTabs';
 
 function mapStateToProps(state){
   return {
-    dictionary: state.dictionary
+    dictionary: state.dictionary.words
   }
 }
 

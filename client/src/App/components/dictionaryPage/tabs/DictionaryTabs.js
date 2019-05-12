@@ -56,7 +56,7 @@ const DictionaryTabs = ({dictionary}) =>{
       {tabNumber === 0 && dictionary && 
         <OrderList dictionary={dictionary} sortDictionary={firstLetterSortedDictionary} />
       }
-      {tabNumber === 1 &&
+      {tabNumber === 1 && dictionary &&
         <OrderList dictionary={dictionary} sortDictionary={subjectSortedDictionary} />
       }
     </Column>

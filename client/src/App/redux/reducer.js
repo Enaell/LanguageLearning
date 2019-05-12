@@ -19,8 +19,10 @@ function getTurnData(cards){
 
 let initialState = {
   user: {},
-  dictionary: [],
-  selectedWords: [],
+  dictionary:{
+    words: [],
+    selectedWords: []  
+  },
   loginModal: {
     open: false,
     tab: 0,
@@ -40,7 +42,39 @@ function reducer(state = initialState, action)
         return Object.assign(
           {},
           state,
-          {dictionary: action.payload.sort((a, b) => {return a.globalName > b.globalName;}) || []}
+          {
+            dictionary: Object.assign({}, state.dictionary, {
+              words: action.payload.sort((a, b) => {return a.globalName > b.globalName;}) || [] 
+                // .map(word => Object.assign(word, {isSelected: true}))
+            })
+          }
+        )
+    case 'UPDATE_SELECTED_WORDS':
+        const selectedWords = [...state.dictionary.selectedWords];
+        const currentIndex = selectedWords.indexOf(action.payload);
+
+
+        // const selectedWordsUpdated = [...selectedWords]; // create a new array from the old one to be catch by useEffects
+
+
+        if (currentIndex === -1) {
+
+          selectedWords.push(action.payload);
+        } else {
+          selectedWords.splice(currentIndex, 1);
+        }
+        return Object.assign(
+          {},
+          state,
+          {
+            dictionary: Object.assign({}, state.dictionary, {selectedWords: selectedWords})
+          }
+        );
+    case 'CLEAN_SELECTED_WORDS':
+        return Object.assign(
+          {},
+          state,
+          {dictionary: Object.assign({}, state.dictionary, {selectedWords: []})}
         )
     case 'TOGGLE_LOGIN_MODAL':
         return Object.assign(
@@ -85,26 +119,6 @@ function reducer(state = initialState, action)
           {
             navSnackBar: Object.assign({}, state.navSnackBar, {variant: action.payload.variant, message: action.payload.message})  
           }
-        )
-    case 'UPDATE_SELECTED_WORDS':
-        const words = state.selectedWords;
-        const currentIndex = words.indexOf(action.payload);
-
-        if (currentIndex === -1) {
-          words.push(action.payload);
-        } else {
-          words.splice(currentIndex, 1);
-        }
-        return Object.assign(
-          {},
-          state,
-          {selectedWords: words}
-        );
-    case 'CLEAN_SELECTED_WORDS':
-        return Object.assign(
-          {},
-          state,
-          {selectedWords: []}
         )
     case 'ANSWER_SELECTED':
         const isCorrect = state.turnData.card.translations.some((tr) => tr === action.payload);
