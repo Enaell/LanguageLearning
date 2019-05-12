@@ -13,6 +13,9 @@ const styles = theme => ({
     marginLeft: -12,
     marginRight: 20,
   },
+  homeButton:{
+    textTransform: 'none',
+  }
 });
 
 function mapStateToProps(state)
@@ -36,4 +39,4 @@ function mapDispatchToProps(dispatch)
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles) (Navbar));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Navbar));

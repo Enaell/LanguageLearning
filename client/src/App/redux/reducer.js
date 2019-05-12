@@ -1,68 +1,5 @@
 import {shuffle, sample} from 'underscore';
-
-
-function getCards(){
-
-  const cards = [
-    {
-      character: '月',
-      pinying: 'yue',
-      translations:['la lune', 'un mois'],
-      comments:''
-    },
-    {
-      character: '天',
-      pinying: 'tian',
-      translations: ['le ciel', 'un jour'],
-      comments:''
-    },
-    {
-      character: '年',
-      pinying:'nian',
-      translations:['une annee', 'un an'],
-      comments:''
-    },
-  
-    { 
-      character: '热',
-      pinying: 're',
-      translations:['chaud', 'avoir chaud'],
-      comments:''
-    },
-    {
-      character: '冷',
-      pinying: 'leng',
-      translations:['froid', 'avoir froid'],
-      comments:''
-    },
-    {
-      character: '是',
-      pinying: 'shi',
-      translations:['etre'],
-      comments:''
-    },
-    {
-      character: '有',
-      pinying: 'you',
-      translations:['avoir'],
-      comments:''
-    },
-    {
-      character: '吃',
-      pinying: 'chi',
-      translations:['manger'],
-      comments:''
-    },
-    {
-      character: '喝',
-      pinying: 'he',
-      translations:['boire'],
-      comments:''
-    }
-  ];
-
-  return cards
-}
+import theme from '../theme';
 
 function getTurnData(cards){
   const allTranslations = cards.reduce(function(p,c,i){
@@ -82,7 +19,10 @@ function getTurnData(cards){
 
 let initialState = {
   user: {},
-  cards: [],
+  dictionary:{
+    words: [],
+    selectedWords: []  
+  },
   loginModal: {
     open: false,
     tab: 0,
@@ -91,19 +31,50 @@ let initialState = {
     open: false,
     variant: 'success',
     message: 'Success !'
-  }
+  },
+  theme: theme
 };
 
 function reducer(state = initialState, action)
 {
   switch (action.type){
-    case 'GET_CARDS':
-        console.log('Get cards');
+    case 'GET_WORDS':
         return Object.assign(
           {},
           state,
-          {cards: getCards(), turnData: getTurnData(getCards()), highlight:''},
-//          {cards: action.payload, turnData: getTurnData(action.payload), highlight:''},
+          {
+            dictionary: Object.assign({}, state.dictionary, {
+              words: action.payload.sort((a, b) => {return a.globalName > b.globalName;}) || [] 
+                // .map(word => Object.assign(word, {isSelected: true}))
+            })
+          }
+        )
+    case 'UPDATE_SELECTED_WORDS':
+        const selectedWords = [...state.dictionary.selectedWords];
+        const currentIndex = selectedWords.indexOf(action.payload);
+
+
+        // const selectedWordsUpdated = [...selectedWords]; // create a new array from the old one to be catch by useEffects
+
+
+        if (currentIndex === -1) {
+
+          selectedWords.push(action.payload);
+        } else {
+          selectedWords.splice(currentIndex, 1);
+        }
+        return Object.assign(
+          {},
+          state,
+          {
+            dictionary: Object.assign({}, state.dictionary, {selectedWords: selectedWords})
+          }
+        );
+    case 'CLEAN_SELECTED_WORDS':
+        return Object.assign(
+          {},
+          state,
+          {dictionary: Object.assign({}, state.dictionary, {selectedWords: []})}
         )
     case 'TOGGLE_LOGIN_MODAL':
         return Object.assign(

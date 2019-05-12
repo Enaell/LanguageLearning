@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import Paper from '@material-ui/core/Paper';
 import {Link} from 'react-router-dom';
 import Turn from './turn/Turn';
-import '../../css/cardTrainingPage.css'
-
 
 function Hero() {
   return (
@@ -30,10 +28,7 @@ function Continue({show, onContinue}) {
 
 const CardTrainingPage = ({turnData, highlight, user, onAnswerSelected, onContinue, getCards, classes }) => 
   {
-    console.log('card training');
-
     useEffect(()=>{
-      console.log('use effect');
       const token = user.id ? user.id : null;
       getCards(token);
       },[]);

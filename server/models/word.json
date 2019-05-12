@@ -18,10 +18,19 @@
       "type": "string",
       "required": true
     },
+    "subject": {
+      "type": [
+        "string"
+      ]
+    },
     "translations": {
       "type": [
         "object"
       ]
+    },
+    "level": {
+      "type": "number",
+      "default": 0
     },
     "comment": {
       "type": "string"
@@ -48,6 +57,12 @@
       "accessType": "READ",
       "principalType": "ROLE",
       "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
       "permission": "ALLOW"
     }
   ],

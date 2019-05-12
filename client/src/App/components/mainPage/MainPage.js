@@ -1,27 +1,33 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography';
 import translate from 'counterpart';
 import { Column } from 'simple-flexbox';
+import { withRouter } from "react-router-dom";
+import  {PageTitle, PageDescription}  from 'App/components/common/GenericPageComponents'
 
 
-const MainPage = ({trainingPageClick, onLoginClick, user}) => {
-  const onTrainingPageClick = () => {
-    const token = user.id ? user.id : null;
-    trainingPageClick(token);
+const MainPage = ({ onLoginClick, history}) => {
+
+  const handleOnCardTrainingClick = () => {
+    history.push('/cardTraining');  
+  }
+
+  const handleOnDictionaryClick = () => {
+    history.push('/dictionary');
   }
 
   return(
     <Column horizontal='center'>
-      <Typography variant="h3">{translate('mainPage.title')}</Typography>
+      <PageTitle title={translate('mainPage.title')} ></PageTitle>
       <Button onClick={onLoginClick}> {translate('connection.login')}</Button>
-      <Button onClick={onTrainingPageClick}> Training</Button>
-      <Button component={Link} to="/cardTraining">
-        Link
+      <Button onClick={handleOnDictionaryClick}>
+        Dictionary
+      </Button>
+      <Button onClick={handleOnCardTrainingClick}>
+        Card Training
       </Button>
     </Column>
   );
 }
 
-export default MainPage;
+export default withRouter(MainPage);
