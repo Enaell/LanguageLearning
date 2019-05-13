@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import '../../bootstrap.min.css';
 import CardTrainingPage from './cardTraining/CardTrainingPage-container';
-import Navbar from './navbar/Navbar-container'
+import Navbar from './navbar'
 import Footer from './footer/Footer'
 import AddCardForm from './addCard/AddCardForm'
-import MainPage from './mainPage/MainPage-container'
-import DictionaryPage from './dictionaryPage/DictionaryPage-container'
+import MainPage from './mainPage'
+import DictionaryPage from './dictionaryPage'
 import { BrowserRouter, Route, Switch as RouterSwitch } from 'react-router-dom'
 import * as Redux from 'redux';
 import * as ReactRedux from 'react-redux';

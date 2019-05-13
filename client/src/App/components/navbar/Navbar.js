@@ -5,9 +5,9 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Button } from '@material-ui/core';
-import LoginModal from './loginModal/LoginModal-container';
-import NavSnackBar from './navSnackBar/NavSnackBar-container';
-import UserBar from './userBar/UserBar-container'
+import LoginModal from './loginModal';
+import NavSnackBar from './navSnackBar';
+import UserBar from './userBar'
 import translate from 'counterpart';
 import { withRouter } from "react-router-dom";
 

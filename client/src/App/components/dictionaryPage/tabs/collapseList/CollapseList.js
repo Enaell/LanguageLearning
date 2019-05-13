@@ -46,18 +46,6 @@ const CollapseList = ({horizontal, style, listTitle, wordList, updateSelectedWor
     setWordList();
   }, [selectedWords])
 
-  // useEffect(() => {
-  //   selectedWords.forEach(word => {
-  //     const currentIndex = wordList.indexOf(word);
-  //     const newChecked = [...checked];
-
-  //     if (currentIndex !== -1){
-  //       newChecked.push(currentIndex + '');
-  //       setChecked(newChecked);
-  //     }
-  //   })
-  // }, []);
-
   useEffect(() => {
     console.log('Checked useEffect');
     console.log(checked);

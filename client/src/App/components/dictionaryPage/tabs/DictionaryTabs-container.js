@@ -8,10 +8,4 @@ function mapStateToProps(state){
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return{
-  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(DictionaryTabs)
+export default connect(mapStateToProps)(DictionaryTabs)

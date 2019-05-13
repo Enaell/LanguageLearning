@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 import  {PageTitle, PageDescription}  from 'App/components/common/GenericPageComponents'
 
 
-const MainPage = ({ onLoginClick, history}) => {
+const MainPage = ({ onLoginClick, history }) => {
 
   const handleOnCardTrainingClick = () => {
     history.push('/cardTraining');  

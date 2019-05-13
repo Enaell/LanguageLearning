@@ -1,9 +1,6 @@
 import { connect } from 'react-redux';
 import CollapseList from './CollapseList';
 
-
-
-
 function mapStateToProps(state){
   return {
     selectedWords: state.dictionary.selectedWords

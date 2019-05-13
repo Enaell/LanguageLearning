@@ -9,7 +9,7 @@ import {getLogMenu, getLogMobileMenu} from './logMenu.js'
 
 
 
-const userBar = ({ user, onLogout, classes }) => {
+const UserBar = ({ user, onLogout, classes }) => {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -79,4 +79,4 @@ const userBar = ({ user, onLogout, classes }) => {
     </div>
   )}
 
-export default userBar;
+export default UserBar;

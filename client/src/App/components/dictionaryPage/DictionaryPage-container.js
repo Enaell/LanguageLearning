@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Dictionary from './DictionaryPage';
+import DictionaryPage from './DictionaryPage';
 
 
 function mapStateToProps(state){
@@ -29,4 +29,4 @@ function mapDispatchToProps(dispatch){
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dictionary)
+export default connect(mapStateToProps, mapDispatchToProps)(DictionaryPage)
