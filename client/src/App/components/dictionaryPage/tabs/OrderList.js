@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CollapseList from './collapseList/CollapseList-container';
+import CollapseList from './collapseList';
 import { Row } from 'simple-flexbox'
 
 const OrderList = ({dictionary, sortDictionary}) => {

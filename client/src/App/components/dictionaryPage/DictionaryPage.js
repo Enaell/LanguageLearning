@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Column } from 'simple-flexbox';
 import translate from 'counterpart';
 import  { PageTitle }  from '../common/GenericPageComponents';
-import DictionaryTabs from './tabs/DictionaryTabs-container'
+import DictionaryTabs from './tabs'
 
 
 const DictionaryPage = ({user, getAllWords}) => {
