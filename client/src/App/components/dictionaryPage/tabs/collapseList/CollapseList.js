@@ -4,9 +4,16 @@ import { Typography } from '@material-ui/core';
 import { Column } from 'simple-flexbox'
 import { WordList } from './WordList'
 
-const CollapseList = ({horizontal, style, listTitle, wordList, updateSelectedWords, selectedWords}) => {
-
-  // Add check to words present in redux selected list
+const CollapseList = (
+  {
+    horizontal,
+    style, 
+    listTitle, 
+    wordList, 
+    updateSelectedWords, 
+    selectedWords, 
+    setWordPreview
+  }) => {
 
   const [checked, setChecked] = React.useState([]);
 
@@ -37,25 +44,19 @@ const CollapseList = ({horizontal, style, listTitle, wordList, updateSelectedWor
   };
 
 
-  const handleToggle = value => () => {
-    updateSelectedWords(wordList[value])
+  const handleToggle = word => () => {
+    updateSelectedWords(word)
   };
 
   useEffect(() => {
-    console.log('SelectedWords use Effect');
     setWordList();
   }, [selectedWords])
-
-  useEffect(() => {
-    console.log('Checked useEffect');
-    console.log(checked);
-  }, [checked])
 
   return (
     <Column horizontal={horizontal} style={style}>
       <Typography style={{cursor: 'pointer'}} onClick={handleSwitchChange} variant="h5">{listTitle}</Typography>
       <Collapse in={switchValue}>
-        <WordList wordList={wordList} handleToggle={handleToggle} checked={checked}/>
+        <WordList wordList={wordList} handleToggle={handleToggle} handleWordPreview={setWordPreview} checked={checked}/>
       </Collapse>
     </Column>
   )

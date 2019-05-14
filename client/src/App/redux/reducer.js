@@ -21,7 +21,8 @@ let initialState = {
   user: {},
   dictionary:{
     words: [],
-    selectedWords: []  
+    selectedWords: [],
+    wordPreview: {}  
   },
   loginModal: {
     open: false,
@@ -52,11 +53,6 @@ function reducer(state = initialState, action)
     case 'UPDATE_SELECTED_WORDS':
         const selectedWords = [...state.dictionary.selectedWords];
         const currentIndex = selectedWords.indexOf(action.payload);
-
-
-        // const selectedWordsUpdated = [...selectedWords]; // create a new array from the old one to be catch by useEffects
-
-
         if (currentIndex === -1) {
 
           selectedWords.push(action.payload);
@@ -67,21 +63,27 @@ function reducer(state = initialState, action)
           {},
           state,
           {
-            dictionary: Object.assign({}, state.dictionary, {selectedWords: selectedWords})
+            dictionary: Object.assign({}, state.dictionary, { selectedWords: selectedWords })
           }
         );
     case 'CLEAN_SELECTED_WORDS':
         return Object.assign(
           {},
           state,
-          {dictionary: Object.assign({}, state.dictionary, {selectedWords: []})}
+          {dictionary: Object.assign({}, state.dictionary, { selectedWords: [] })}
+        )
+    case 'SET_WORD_PREVIEW':
+        return Object.assign(
+          {},
+          state,
+          {dictionary: Object.assign({}, state.dictionary, { wordPreview: action.payload })}
         )
     case 'TOGGLE_LOGIN_MODAL':
         return Object.assign(
           {},
           state,
           {
-            loginModal: Object.assign({}, state.loginModal,{open: !state.loginModal.open})
+            loginModal: Object.assign({}, state.loginModal,{ open: !state.loginModal.open })
           }
         )
     case 'CHANGE_LOGIN_MODAL_TAB':
@@ -89,7 +91,7 @@ function reducer(state = initialState, action)
           {},
           state,
           {
-            loginModal: Object.assign({}, state.loginModal, {tab: action.payload})  
+            loginModal: Object.assign({}, state.loginModal, { tab: action.payload })  
           }
         )
     case 'LOGIN':
@@ -109,7 +111,7 @@ function reducer(state = initialState, action)
           {}, 
           state, 
           {
-            navSnackBar: Object.assign({}, state.navSnackBar, {open: !state.navSnackBar.open})
+            navSnackBar: Object.assign({}, state.navSnackBar, { open: !state.navSnackBar.open })
           }
         );
     case 'SET_NAV_SNACKBAR':
@@ -117,7 +119,7 @@ function reducer(state = initialState, action)
           {},
           state,
           {
-            navSnackBar: Object.assign({}, state.navSnackBar, {variant: action.payload.variant, message: action.payload.message})  
+            navSnackBar: Object.assign({}, state.navSnackBar, { variant: action.payload.variant, message: action.payload.message })  
           }
         )
     case 'ANSWER_SELECTED':

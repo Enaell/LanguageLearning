@@ -9,9 +9,12 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
   return{
-    updateSelectedWords: (word) =>{
+    updateSelectedWords: (word) => {
       dispatch({type: 'UPDATE_SELECTED_WORDS', payload: word})
     },
+    setWordPreview: (word) => {
+      dispatch({type: 'SET_WORD_PREVIEW', payload: word})
+    }
   }
 }
 

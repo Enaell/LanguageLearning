@@ -21,21 +21,22 @@ const translationList = (translations) => {
   return s;
 }
 
-export const WordList = ({wordList, handleToggle, checked}) => {
+export const WordList = ({ wordList, handleToggle, checked, handleWordPreview }) => {
+  console.log(wordList);
   return (
     <List>
-    {Object.keys(wordList).map(value => {
+    {wordList.map((word, index) => {
       return(
-        <ListItem style={{minWidth: '350px'}} key={value} role={undefined} button onClick={handleToggle(value)}>
-          <Checkbox color={'primary'} checked={checked.indexOf(value) !== -1} tabIndex={-1} disableRipple />
+        <ListItem style={{minWidth: '350px'}} key={index} role={undefined} button onClick={handleToggle(word)}>
+          <Checkbox color={'primary'} checked={checked.indexOf(`${index}`) !== -1} tabIndex={-1} disableRipple />
           <ListItemText
             style={{paddingRight: '30px'}} 
-            primary={`${wordList[value].name} - ${wordList[value].globalName}`}
+            primary={`${word.name} - ${word.globalName}`}
             primaryTypographyProps={{variant:'body1'}}
-            secondary={`${translationList(wordList[value].translations)}`} 
+            secondary={`${translationList(word.translations)}`} 
           />
           <ListItemSecondaryAction >
-            <IconButton aria-label="Comments">
+            <IconButton aria-label="wordPreview" onClick={() => handleWordPreview(word)}>
               <CommentIcon />
             </IconButton>
           </ListItemSecondaryAction>

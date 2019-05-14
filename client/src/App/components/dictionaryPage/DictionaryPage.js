@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { Column } from 'simple-flexbox';
+import { Column, Row } from 'simple-flexbox';
 import translate from 'counterpart';
-import  { PageTitle }  from '../common/GenericPageComponents';
+import  { PageTitle }  from '../common/GenericComponents';
 import DictionaryTabs from './tabs'
+import WordPreview from './wordPreview'
 
 
 const DictionaryPage = ({user, getAllWords}) => {
@@ -15,8 +16,12 @@ const DictionaryPage = ({user, getAllWords}) => {
   return(
     <Column horizontal='center'>
       <PageTitle title={translate('dictionaryPage.title')} ></PageTitle>
-      <DictionaryTabs></DictionaryTabs>
-    </Column>);
+      <Row>
+        <DictionaryTabs />
+        {/* <WordPreview  /> */}
+      </Row>
+    </Column>
+  );
 }
 
 export default DictionaryPage;
