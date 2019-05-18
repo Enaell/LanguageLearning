@@ -18,7 +18,7 @@ const DictionaryPage = ({user, getAllWords}) => {
       <PageTitle title={translate('dictionaryPage.title')} ></PageTitle>
       <Row>
         <DictionaryTabs />
-        {/* <WordPreview  /> */}
+        <WordPreview />
       </Row>
     </Column>
   );

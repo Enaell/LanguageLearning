@@ -22,7 +22,8 @@ let initialState = {
   dictionary:{
     words: [],
     selectedWords: [],
-    wordPreview: {}  
+    wordPreview: {},
+    openWordPreview: false
   },
   loginModal: {
     open: false,
@@ -70,13 +71,13 @@ function reducer(state = initialState, action)
         return Object.assign(
           {},
           state,
-          {dictionary: Object.assign({}, state.dictionary, { selectedWords: [] })}
+          {dictionary: Object.assign({}, state.dictionary, { selectedWords: [], openWordPreview: false })}
         )
     case 'SET_WORD_PREVIEW':
         return Object.assign(
           {},
           state,
-          {dictionary: Object.assign({}, state.dictionary, { wordPreview: action.payload })}
+          {dictionary: Object.assign({}, state.dictionary, { wordPreview: action.payload, openWordPreview: true })}
         )
     case 'TOGGLE_LOGIN_MODAL':
         return Object.assign(

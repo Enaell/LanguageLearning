@@ -22,7 +22,6 @@ const translationList = (translations) => {
 }
 
 export const WordList = ({ wordList, handleToggle, checked, handleWordPreview }) => {
-  console.log(wordList);
   return (
     <List>
     {wordList.map((word, index) => {

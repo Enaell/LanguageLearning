@@ -4,8 +4,18 @@ import WordPreview from './WordPreview';
 
 function mapStateToProps(state){
   return {
-    word: state.dictionary.words
+    word: state.dictionary.wordPreview,
+    open: state.dictionary.openWordPreview
   }
 }
 
-export default connect(mapStateToProps)(WordPreview)
+function mapDispatchToProps(dispatch)
+{
+  return {
+    closeWordPreview: () => {
+      dispatch({type: 'CLEAN_SELECTED_WORDS'})
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WordPreview)
