@@ -18,8 +18,29 @@ import RouteNotFound from './RouteNotfound';
 import { Column } from 'simple-flexbox';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import theme from '../theme';
+import { withStyles } from '@material-ui/core/styles';
 
 console.log(React.version);
+
+const styles = theme => ({
+  '@global': {
+    '*::-webkit-scrollbar': {
+      width: '10px'
+    },
+    '*::-webkit-scrollbar-track': {
+      background: '#f1f1f1'
+    },
+    '*::-webkit-scrollbar-thumb': {
+      background: '#888',
+      borderRadius: '8px',
+      boxShadow: 'inset 0 0 1px 1px #f1f1f1'
+
+    },
+    '*::-webkit-scrollbar-thumb:hover': {
+      background: '#007600'
+    },
+  }
+});
 
 counterpart.registerTranslations('en', localeEn);
 counterpart.registerTranslations('fr', localeFr);
@@ -53,4 +74,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withStyles(styles)(App);

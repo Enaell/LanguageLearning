@@ -23,7 +23,7 @@ const Navbar = ({user, openLoginModal, openSigninModal, classes, history}) => {
 
    return(
     <div className={classes.root}>
-      <AppBar position="static" color='primary'>
+      <AppBar position='fixed' color='primary'>
         <Toolbar>
           <IconButton onClick={handleSideMenuClick} className={classes.menuButton} color="inherit" aria-label="Open drawer">
             <MenuIcon />

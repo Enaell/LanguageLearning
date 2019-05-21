@@ -4,27 +4,7 @@ import translate from 'counterpart';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import OrderList from './OrderList';
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
-import { Paper } from '@material-ui/core';
 
-const styles = theme => ({
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginRight: 300,
-  }
-});
 
 const firstLetterSortedDictionary = (dictionary) => {
   
@@ -64,9 +44,6 @@ const DictionaryTabs = ({dictionary, openWordPreview, classes}) =>{
   return (
     // style={{marginRight: `${openWordPreview ? 300 : 0}px`}}
     <Column
-      className={classNames(classes.content, {
-        [classes.contentShift]: openWordPreview,
-      })}
       horizontal='center'
     >
 
@@ -91,4 +68,4 @@ const DictionaryTabs = ({dictionary, openWordPreview, classes}) =>{
   )
 }
 
-export default withStyles(styles, {withTheme: true })(DictionaryTabs);
+export default DictionaryTabs;

@@ -5,7 +5,8 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
   pageTitle:{
-    margin: '50px'
+    margin: '50px',
+    marginTop: '65px'
   },
   pageDescription:{
     maxWidth: '1140px'
