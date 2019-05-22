@@ -7,7 +7,6 @@ import WordPreview from './wordPreview';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 
-
 const styles = theme => ({
   content: {
     flexGrow: 1,
@@ -25,6 +24,7 @@ const styles = theme => ({
     marginRight: 300,
   }
 });
+
 
 const DictionaryPage = ({user, getAllWords, openWordPreview, classes}) => {
 

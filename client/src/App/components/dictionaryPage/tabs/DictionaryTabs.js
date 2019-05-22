@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Column } from 'simple-flexbox';
 import translate from 'counterpart';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import OrderList from './OrderList';
+import InputBase from '@material-ui/core/InputBase';
 
 
 const firstLetterSortedDictionary = (dictionary) => {
@@ -32,21 +33,47 @@ const subjectSortedDictionary = (dictionary) => {
   return sortedDictionary;
 }
 
+const filteredWords = (words, filter) => {
+  console.log(words);
 
-const DictionaryTabs = ({dictionary, openWordPreview, classes}) =>{
+  if (filter && filter.length > 0) {
+    return (
+      words &&
+      words.filter(word => {
+        const rgxp = new RegExp(filter.toLowerCase());
+        const wordName = word.name.toLowerCase();
+        const wordGlobalName = word.globalName.toLowerCase();
+        return wordName.match(rgxp) || wordGlobalName.match(rgxp);
+      })
+    );
+  }
+  console.log(words);
+  return words;
+};
+
+
+const DictionaryTabs = ({words, classes}) =>{
   
+  const [dictionary, setDictionary] = useState(words)
+
+  const [filter, setFilter] = useState('');
+
+  useEffect(() => {
+    setDictionary(filteredWords(words, filter))
+  }, [filter, words]);
+
+
   const [tabNumber, setTabNumber] = useState(0);
 
   const handleTabChange = (event, newValue) => {
     setTabNumber(newValue);
   }
 
+
   return (
-    // style={{marginRight: `${openWordPreview ? 300 : 0}px`}}
     <Column
       horizontal='center'
     >
-
       <Tabs
       style={{maxWidth: '1150px'}}
       value={tabNumber}
@@ -58,6 +85,17 @@ const DictionaryTabs = ({dictionary, openWordPreview, classes}) =>{
         <Tab label={translate('dictionaryPage.alphabeticOrder')}/>
         <Tab label={translate('dictionaryPage.subject')}/>
       </Tabs>
+
+      <div className={classes.filter}>
+        <p className={classes.filterTitle}>{translate('dictionaryPage.filter')}</p>
+        <InputBase
+          className={classes.filterInput}
+          type="text"
+          value={filter}
+          onChange={e => setFilter(e.target.value)}
+        />
+      </div>
+
       {tabNumber === 0 && dictionary && 
         <OrderList dictionary={dictionary} sortDictionary={firstLetterSortedDictionary} />
       }

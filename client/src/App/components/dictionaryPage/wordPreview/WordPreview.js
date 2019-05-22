@@ -50,7 +50,6 @@ const WordPreview = ({ word, open, closeWordPreview, classes, theme}) => {
       align='left' 
       wordDetailAlign='center'
     />
-
     <TranslationList word={word}/>
   </Drawer>
   )

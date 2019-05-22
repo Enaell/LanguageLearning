@@ -19,6 +19,7 @@
   "dictionaryPage": {
     "title": "Dictionaire",
     "subject": "Sujet",
-    "alphabeticOrder": "Ordre Alphabétique" 
+    "alphabeticOrder": "Ordre Alphabétique",
+    "filter": "filtre"
   }
 }
