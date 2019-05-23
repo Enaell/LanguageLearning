@@ -3,7 +3,7 @@ import { Column, Row } from 'simple-flexbox';
 import translate from 'counterpart';
 import  { PageTitle }  from '../common/GenericComponents';
 import DictionaryTabs from './tabs';
-import WordPreview from './wordPreview';
+import DictionarySidePanel from './dictionarySidePanel';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -44,7 +44,7 @@ const DictionaryPage = ({user, getAllWords, openWordPreview, classes}) => {
       <PageTitle title={translate('dictionaryPage.title')} ></PageTitle>
       <Row style={{width: '100%'}}>
         <DictionaryTabs />
-        <WordPreview />
+        <DictionarySidePanel />
       </Row>
     </Column>
   );

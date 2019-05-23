@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import WordPreview from './WordPreview';
+import DictionarySidePanel from './DictionarySidePanel';
 
 
 function mapStateToProps(state){
@@ -18,4 +18,4 @@ function mapDispatchToProps(dispatch)
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WordPreview)
+export default connect(mapStateToProps, mapDispatchToProps)(DictionarySidePanel)

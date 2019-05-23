@@ -86,14 +86,10 @@ const DictionaryTabs = ({words, classes}) =>{
         <Tab label={translate('dictionaryPage.subject')}/>
       </Tabs>
 
-      <Filter setFilter={setFilter} filter={filter} />
+      {words.length > 0 && <Filter setFilter={setFilter} filter={filter} />}
 
-      {tabNumber === 0 && dictionary && 
-        <OrderList dictionary={dictionary} sortDictionary={firstLetterSortedDictionary} />
-      }
-      {tabNumber === 1 && dictionary &&
-        <OrderList dictionary={dictionary} sortDictionary={subjectSortedDictionary} />
-      }
+      {tabNumber === 0 && dictionary && <OrderList dictionary={dictionary} sortDictionary={firstLetterSortedDictionary} />}
+      {tabNumber === 1 && dictionary && <OrderList dictionary={dictionary} sortDictionary={subjectSortedDictionary} />}
     </Column>
   )
 }
