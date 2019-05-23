@@ -4,7 +4,7 @@ import translate from 'counterpart';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import OrderList from './OrderList';
-import InputBase from '@material-ui/core/InputBase';
+import { Filter } from 'App/components/common/GenericComponents';
 
 
 const firstLetterSortedDictionary = (dictionary) => {
@@ -73,9 +73,9 @@ const DictionaryTabs = ({words, classes}) =>{
   return (
     <Column
       horizontal='center'
+      style={{width: '100%', maxWidth: '100%'}}
     >
       <Tabs
-      style={{maxWidth: '1150px'}}
       value={tabNumber}
       onChange={handleTabChange}
       indicatorColor="primary"
@@ -86,15 +86,7 @@ const DictionaryTabs = ({words, classes}) =>{
         <Tab label={translate('dictionaryPage.subject')}/>
       </Tabs>
 
-      <div className={classes.filter}>
-        <p className={classes.filterTitle}>{translate('dictionaryPage.filter')}</p>
-        <InputBase
-          className={classes.filterInput}
-          type="text"
-          value={filter}
-          onChange={e => setFilter(e.target.value)}
-        />
-      </div>
+      <Filter setFilter={setFilter} filter={filter} />
 
       {tabNumber === 0 && dictionary && 
         <OrderList dictionary={dictionary} sortDictionary={firstLetterSortedDictionary} />

@@ -34,20 +34,19 @@ const DictionaryPage = ({user, getAllWords, openWordPreview, classes}) => {
     },[]);
 
   return(
-    <div>
     <Column 
+      style={{width: '100%', maxWidth: '1200px'}}
       horizontal='center'
       className={classNames(classes.content, {
         [classes.contentShift]: openWordPreview,
       })}
     >
       <PageTitle title={translate('dictionaryPage.title')} ></PageTitle>
-      <Row>
+      <Row style={{width: '100%'}}>
         <DictionaryTabs />
         <WordPreview />
       </Row>
     </Column>
-    </div>
   );
 }
 
