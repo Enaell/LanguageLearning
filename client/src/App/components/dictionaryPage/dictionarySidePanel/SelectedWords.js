@@ -21,24 +21,24 @@ const translationList = (translations) => {
   return s;
 }
 
-export const WordList = ({ wordList, handleToggle, checked, handleWordPreview }) => {
+export const SelectedWords = ({ wordList, handleWordPreview }) => {
   return (
     <List>
     {wordList.map((word, index) => {
       return(
-        <ListItem style={{minWidth: '350px'}} key={index} role={undefined} button onClick={handleToggle(word)}>
-          <Checkbox color={'primary'} checked={checked.indexOf(`${index}`) !== -1} tabIndex={-1} disableRipple />
-          <ListItemText
+        <ListItem style={{minWidth: '350px'}} key={index} role={undefined} button onClick={handleWordPreview(word)}>
+         <ListItemText
             style={{paddingRight: '30px'}} 
             primary={`${word.name} - ${word.globalName}`}
             primaryTypographyProps={{variant:'body1'}}
-            secondary={`${translationList(word.translations)}`} 
+            secondary={`${translationList(word.translations)}`}
+            dense
           />
-          <ListItemSecondaryAction >
-            <IconButton aria-label="wordPreview" onClick={() => handleWordPreview(word)}>
+          {/* <ListItemSecondaryAction >
+            <IconButton aria-label="wordPreview" onClick={handleWordPreview(word)}>
               <CommentIcon />
             </IconButton>
-          </ListItemSecondaryAction>
+          </ListItemSecondaryAction> */}
         </ListItem>
       )})
     }

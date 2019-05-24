@@ -11,6 +11,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
 import { Column } from 'simple-flexbox';
+import { SelectedWords } from './SelectedWords';
 
 
 const styles = theme => ({
@@ -31,7 +32,7 @@ const styles = theme => ({
   },
 });
 
-const DictionarySidePanel = ({ word, open, closeWordPreview, classes, theme}) => {
+const DictionarySidePanel = ({ word, open, selectedWords, closeWordPreview, setWordPreview, classes, theme}) => {
   
   return (
     <Drawer
@@ -71,6 +72,7 @@ const DictionarySidePanel = ({ word, open, closeWordPreview, classes, theme}) =>
         <Typography>Selected Words</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
+        <SelectedWords wordList={selectedWords} handleWordPreview={setWordPreview} />
       </ExpansionPanelDetails>
     </ExpansionPanel>
   </Drawer>
