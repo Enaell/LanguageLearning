@@ -26,7 +26,7 @@ const styles = theme => ({
 });
 
 
-const DictionaryPage = ({user, getAllWords, openWordPreview, classes}) => {
+const DictionaryPage = ({user, getAllWords, openSidePanel, classes}) => {
 
   useEffect(()=>{
     const token = user.id ? user.id : null;
@@ -38,7 +38,7 @@ const DictionaryPage = ({user, getAllWords, openWordPreview, classes}) => {
       style={{width: '100%', maxWidth: '1200px'}}
       horizontal='center'
       className={classNames(classes.content, {
-        [classes.contentShift]: openWordPreview,
+        [classes.contentShift]: openSidePanel,
       })}
     >
       <PageTitle title={translate('dictionaryPage.title')} ></PageTitle>

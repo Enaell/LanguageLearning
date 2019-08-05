@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { WordCard, TranslationList } from 'App/components/common/CardsComponents'
 import Drawer from '@material-ui/core/Drawer';
 import { withStyles } from '@material-ui/core/styles';
@@ -32,7 +32,19 @@ const styles = theme => ({
   },
 });
 
-const DictionarySidePanel = ({ word, open, selectedWords, closeWordPreview, setWordPreview, classes, theme}) => {
+const DictionarySidePanel = ({ 
+  word,
+  open,
+  selectedWords,
+  toggleSidePanel,
+  setWordPreview,
+  openWordPreview,
+  openSelectedWords,
+  toggleSelectedWords,
+  toggleWordPreview,
+  classes,
+  theme
+}) => {
   
   return (
     <Drawer
@@ -45,18 +57,18 @@ const DictionarySidePanel = ({ word, open, selectedWords, closeWordPreview, setW
       }}
     >
     <div className={classes.drawerHeader}>
-      <IconButton onClick={closeWordPreview}>
+      <IconButton onClick={toggleSidePanel}>
         {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
       </IconButton>
     </div>
 
-    <ExpansionPanel>
+    <ExpansionPanel expanded={openWordPreview} onChange={toggleWordPreview}>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
         <Typography>Word Preview</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails style={{ padding: '0' }}>
         <Column style={{ width: '100%' }}>
-          <WordCard 
+          <WordCard
             style={{margin: '0 30px', overflow: 'initial'}} 
             word={word}
             horizontal='center' 
@@ -67,7 +79,7 @@ const DictionarySidePanel = ({ word, open, selectedWords, closeWordPreview, setW
         </Column>    
       </ExpansionPanelDetails>
     </ExpansionPanel>
-    <ExpansionPanel>
+    <ExpansionPanel expanded={openSelectedWords} onChange={toggleSelectedWords}>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
         <Typography>Selected Words</Typography>
       </ExpansionPanelSummary>

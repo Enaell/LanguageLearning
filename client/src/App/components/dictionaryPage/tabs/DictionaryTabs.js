@@ -5,7 +5,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import OrderList from './OrderList';
 import { Filter } from 'App/components/common/GenericComponents';
-
+import Switch from '@material-ui/core/Switch';
 
 const firstLetterSortedDictionary = (dictionary) => {
   
@@ -86,7 +86,17 @@ const DictionaryTabs = ({words, classes}) =>{
         <Tab label={translate('dictionaryPage.subject')}/>
       </Tabs>
 
-      {words.length > 0 && <Filter setFilter={setFilter} filter={filter} />}
+      {words.length > 0 && 
+      <>
+        <Filter setFilter={setFilter} filter={filter} />
+        <Switch
+          checked={state.checkedB}
+          onChange={handleChange('checkedB')}
+          value="checkedB"
+          color="primary"
+        />
+      </>
+      }
 
       {tabNumber === 0 && dictionary && <OrderList dictionary={dictionary} sortDictionary={firstLetterSortedDictionary} />}
       {tabNumber === 1 && dictionary && <OrderList dictionary={dictionary} sortDictionary={subjectSortedDictionary} />}

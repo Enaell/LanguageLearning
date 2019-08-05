@@ -23,7 +23,10 @@ let initialState = {
     words: [],
     selectedWords: [],
     wordPreview: {},
-    openWordPreview: false
+    openSidePanel: false,
+    openSelectedWords: false,
+    openWordPreview: false,
+    selectedWordsSwitchChecked: false
   },
   loginModal: {
     open: false,
@@ -51,6 +54,22 @@ function reducer(state = initialState, action)
             })
           }
         )
+    case 'OPEN_SIDE_PANEL':
+        return Object.assign(
+          {},
+          state,
+          {
+            dictionary: Object.assign({}, state.dictionary, { openSidePanel: true })
+          }
+        );
+    case 'TOGGLE_SIDE_PANEL':
+        return Object.assign(
+          {},
+          state,
+          {
+            dictionary: Object.assign({}, state.dictionary, { openSidePanel: !state.dictionary.openSidePanel })
+          }
+        );
     case 'UPDATE_SELECTED_WORDS':
         const selectedWords = [...state.dictionary.selectedWords];
         const currentIndex = selectedWords.indexOf(action.payload);
@@ -71,13 +90,31 @@ function reducer(state = initialState, action)
         return Object.assign(
           {},
           state,
-          {dictionary: Object.assign({}, state.dictionary, { selectedWords: [], openWordPreview: false })}
+          {dictionary: Object.assign({}, state.dictionary, { selectedWords: []})}
         )
     case 'SET_WORD_PREVIEW':
         return Object.assign(
           {},
           state,
-          {dictionary: Object.assign({}, state.dictionary, { wordPreview: action.payload, openWordPreview: true })}
+          {dictionary: Object.assign({}, state.dictionary, { wordPreview: action.payload })}
+        )
+    case 'OPEN_WORD_PREVIEW':
+        return Object.assign(
+          {},
+          state,
+          {dictionary: Object.assign({}, state.dictionary, { openWordPreview: true })}
+        )
+    case 'TOGGLE_WORD_PREVIEW':
+        return Object.assign(
+          {},
+          state,
+          {dictionary: Object.assign({}, state.dictionary, { openWordPreview: !state.dictionary.openWordPreview })}
+        )
+    case 'TOGGLE_SELECTED_WORDS':
+        return Object.assign(
+          {},
+          state,
+          {dictionary: Object.assign({}, state.dictionary, { openSelectedWords: !state.dictionary.openSelectedWords })}
         )
     case 'TOGGLE_LOGIN_MODAL':
         return Object.assign(

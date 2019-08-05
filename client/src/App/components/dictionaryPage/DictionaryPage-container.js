@@ -5,7 +5,7 @@ import DictionaryPage from './DictionaryPage';
 function mapStateToProps(state){
   return {
     user: state.user,
-    openWordPreview: state.dictionary.openWordPreview
+    openSidePanel: state.dictionary.openSidePanel
   }
 }
 
