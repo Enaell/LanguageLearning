@@ -19,6 +19,7 @@ function mapDispatchToProps(dispatch)
       dispatch({type: 'TOGGLE_SIDE_PANEL'});
     },
     setWordPreview: (word) => {
+      console.log('component call before dispatch');
       dispatch({type: 'SET_WORD_PREVIEW', payload: word});
     },
     toggleWordPreview: () => {

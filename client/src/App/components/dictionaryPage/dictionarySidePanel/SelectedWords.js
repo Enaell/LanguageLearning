@@ -22,11 +22,15 @@ const translationList = (translations) => {
 }
 
 export const SelectedWords = ({ wordList, handleWordPreview }) => {
+
+  console.log('selected words component wordlist');
+  console.log(wordList);
+
   return (
     <List>
     {wordList.map((word, index) => {
       return(
-        <ListItem style={{minWidth: '350px'}} key={index} role={undefined} button onClick={handleWordPreview(word)}>
+        <ListItem style={{minWidth: '350px'}} key={index} role={undefined} button onClick={() => handleWordPreview(word)}>
          <ListItemText
             style={{paddingRight: '30px'}} 
             primary={`${word.name} - ${word.globalName}`}

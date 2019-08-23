@@ -4,10 +4,9 @@ import translate from 'counterpart';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import OrderList from './OrderList';
-import { Filter } from 'App/components/common/GenericComponents';
-import Switch from '@material-ui/core/Switch';
+import { Filter, DualSwitch } from 'App/components/common/GenericComponents';
 
-const firstLetterSortedDictionary = (dictionary) => {
+const firstLetterSortedDictionary = dictionary => {
   
   let sortedDictionary = {}
 
@@ -19,7 +18,7 @@ const firstLetterSortedDictionary = (dictionary) => {
   return sortedDictionary;
 }
 
-const subjectSortedDictionary = (dictionary) => {
+const subjectSortedDictionary = dictionary => {
 
   let sortedDictionary = {}
   
@@ -33,8 +32,11 @@ const subjectSortedDictionary = (dictionary) => {
   return sortedDictionary;
 }
 
+const alphabeticSort =  (a, b) => a.globalName > b.globalName;
+
+const levelSort = (a, b) => a.level > b.level;
+
 const filteredWords = (words, filter) => {
-  console.log(words);
 
   if (filter && filter.length > 0) {
     return (
@@ -47,21 +49,33 @@ const filteredWords = (words, filter) => {
       })
     );
   }
-  console.log(words);
   return words;
 };
 
 
-const DictionaryTabs = ({words, classes}) =>{
-  
-  const [dictionary, setDictionary] = useState(words)
+const DictionaryTabs = ({words}) =>{
+
+  const alphabeticOrderText = translate('dictionaryPage.alphabeticOrder');
+  const levelOrderText = translate('dictionaryPage.levelOrder');
+
+  const switchValues = [alphabeticOrderText, levelOrderText];
+
+  const sortBySwitchValue = {
+    alphabeticOrderText: alphabeticSort,
+    levelOrderText: levelSort
+  }
+
+  const [dictionary, setDictionary] = useState(words);
 
   const [filter, setFilter] = useState('');
+
+  const handleSubFunctionChange = value => {
+    setDictionary(dictionary.sort(sortBySwitchValue[value]));
+  }
 
   useEffect(() => {
     setDictionary(filteredWords(words, filter))
   }, [filter, words]);
-
 
   const [tabNumber, setTabNumber] = useState(0);
 
@@ -89,16 +103,11 @@ const DictionaryTabs = ({words, classes}) =>{
       {words.length > 0 && 
       <>
         <Filter setFilter={setFilter} filter={filter} />
-        <Switch
-          checked={state.checkedB}
-          onChange={handleChange('checkedB')}
-          value="checkedB"
-          color="primary"
-        />
+        <DualSwitch values={[switchValues[0], switchValues[1]]} changeSelectedValue={handleSubFunctionChange}/>
       </>
       }
 
-      {tabNumber === 0 && dictionary && <OrderList dictionary={dictionary} sortDictionary={firstLetterSortedDictionary} />}
+      {tabNumber === 0 && dictionary && <OrderList dictionary={dictionary} sortDictionary={firstLetterSortedDictionary}  />}
       {tabNumber === 1 && dictionary && <OrderList dictionary={dictionary} sortDictionary={subjectSortedDictionary} />}
     </Column>
   )

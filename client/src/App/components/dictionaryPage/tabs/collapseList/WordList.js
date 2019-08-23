@@ -26,7 +26,7 @@ export const WordList = ({ wordList, handleToggle, checked, handleWordPreview })
     <List>
     {wordList.map((word, index) => {
       return(
-        <ListItem style={{minWidth: '350px'}} key={index} role={undefined} button onClick={handleToggle(word)}>
+        <ListItem style={{minWidth: '350px'}} key={index} role={undefined} button onClick={() => handleToggle(word)}>
           <Checkbox color={'primary'} checked={checked.indexOf(`${index}`) !== -1} tabIndex={-1} disableRipple />
           <ListItemText
             style={{paddingRight: '30px'}} 

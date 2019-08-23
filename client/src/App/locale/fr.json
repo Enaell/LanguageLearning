@@ -20,6 +20,7 @@
     "title": "Dictionaire",
     "subject": "Sujet",
     "alphabeticOrder": "Ordre Alphabétique",
+    "levelOrder": "Ordre par Niveau",
     "filter": "filtre"
   }
 }

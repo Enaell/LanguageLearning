@@ -1,8 +1,10 @@
 import React from 'react';
-import { Column } from 'simple-flexbox';
+import { Column, Row } from 'simple-flexbox';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
+import Switch from '@material-ui/core/Switch';
 import translate from 'counterpart';
+
 
 const styles = {
   pageTitle:{
@@ -59,7 +61,7 @@ export const PageDescription = ({ descriptions }) => {
   )
 }
 
-export const Filter = ({ setFilter, filter }) => {
+export const Filter = ({ filter, setFilter }) => {
   return (
     <div style={styles.filter}>
       <p style={styles.filterTitle}>{translate('dictionaryPage.filter')}</p>
@@ -70,5 +72,29 @@ export const Filter = ({ setFilter, filter }) => {
         onChange={e => setFilter(e.target.value)}
       />
     </div>
+  )
+}
+
+export const DualSwitch =  ({ values, changeSelectedValue }) => {
+
+  const [checked, setChecked] = React.useState(false);
+
+  const handleChange = event => {
+    setChecked( event.target.checked );
+    event.target.checked ? changeSelectedValue(values[0]) : changeSelectedValue(values[1]);
+  };
+
+  return (
+    <Row>
+      {values[0]}
+      <Switch
+        checked={checked}
+        onChange={handleChange}
+        value={values[1]}
+        color="primary"
+        inputProps={{ 'aria-label': 'primary checkbox' }}
+      />
+      {values[1]}
+    </Row>
   )
 }

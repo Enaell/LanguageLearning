@@ -44,7 +44,7 @@ const CollapseList = (
   };
 
 
-  const handleToggle = word => () => {
+  const handleToggle = word => {
     updateSelectedWords(word)
   };
 

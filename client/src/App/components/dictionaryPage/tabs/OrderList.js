@@ -4,9 +4,9 @@ import { Row } from 'simple-flexbox'
 
 const OrderList = ({dictionary, sortDictionary}) => {
 
-  const [listOfWords, setlistOfWords] = useState(sortDictionary(dictionary));
+  const [listOfWords, setlistOfWords] = useState(sortDictionary ? sortDictionary(dictionary): {});
 
-  useEffect(() => setlistOfWords(sortDictionary(dictionary)), [dictionary])
+  useEffect(() => setlistOfWords(sortDictionary ? sortDictionary(dictionary): {}), [dictionary, sortDictionary])
 
   return (
     <Row wrap horizontal='center' style={{maxWidth: '1150px'}}>
