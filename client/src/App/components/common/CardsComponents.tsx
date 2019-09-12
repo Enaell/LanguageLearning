@@ -1,6 +1,7 @@
 import React from 'react';
+import {WordType, HorizontalType, VariantType} from './types';
 import Typography from '@material-ui/core/Typography';
-import { Card, CardContent } from '@material-ui/core';
+import { Card, CardContent, PropTypes } from '@material-ui/core';
 import { Column } from 'simple-flexbox';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -10,7 +11,13 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-export const WordCard = ({ word, elevation, align, wordDetailAlign, style }) => {
+export const WordCard = ({ 
+    word, 
+    elevation, 
+    align, 
+    wordDetailAlign, 
+    style
+  }: {word: WordType, elevation: number, align: PropTypes.Alignment, wordDetailAlign: PropTypes.Alignment, style: any }) => {
   return (
     <Card elevation={ elevation || 1 } style={style}>
       <CardContent>
@@ -31,7 +38,12 @@ export const WordCard = ({ word, elevation, align, wordDetailAlign, style }) => 
   );
 }
 
-export const WordColumn = ({ word, horizontal, nameVariant, globalNameVariant }) => {
+export const WordColumn = ({
+  word, 
+  horizontal, 
+  nameVariant, 
+  globalNameVariant 
+}: {word: WordType, horizontal: HorizontalType, nameVariant: VariantType, globalNameVariant: VariantType}) => {
   return (
     <Column horizontal={ horizontal || 'center'} >
         <Typography color="textSecondary" gutterBottom>
@@ -50,7 +62,7 @@ export const WordColumn = ({ word, horizontal, nameVariant, globalNameVariant })
   )
 }
 
-export const TranslationList = ({word}) => {
+export const TranslationList = ( { word }: { word: WordType }) => {
   return (
     <div style={{margin: '20px 0'}}>
     {word && word.translations && word.translations.map((translation) => (

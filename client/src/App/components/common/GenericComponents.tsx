@@ -26,7 +26,7 @@ const styles = {
     width: '32px',
     color: '#595959',
     fontSize: '14px',
-    fontWeight: '400',
+    fontWeight: 400,
     lineHeight: '14px',
   },
   filterInput: {
@@ -75,7 +75,7 @@ export const Filter = ({ filter, setFilter }) => {
   )
 }
 
-export const DualSwitch =  ({ values, changeSelectedValue }) => {
+export const DualSwitch =  ({ values, changeSelectedValue }: {values: string[], changeSelectedValue: Function}) => {
 
   const [checked, setChecked] = React.useState(false);
 
