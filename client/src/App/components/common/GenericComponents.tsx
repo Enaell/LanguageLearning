@@ -41,7 +41,7 @@ const styles = {
   }
 };
 
-export const PageTitle = ({ title }) => {
+export const PageTitle = ({ title } : { title: string }) => {
   return (
     <Column horizontal='center'>
       <Typography style={styles.pageTitle} variant="h3" color={'primary'} >{title}</Typography>
@@ -50,7 +50,7 @@ export const PageTitle = ({ title }) => {
 }
 
 // description must be string[]
-export const PageDescription = ({ descriptions }) => {
+export const PageDescription = ({ descriptions } : { descriptions: string[] }) => {
   return (
     <Column horizontal='center' style={styles.pageDescription}>
       {descriptions.map((description) => (
@@ -61,7 +61,7 @@ export const PageDescription = ({ descriptions }) => {
   )
 }
 
-export const Filter = ({ filter, setFilter }) => {
+export const Filter = ({ filter, setFilter }: { filter: string, setFilter: (s : string) => void}) => {
   return (
     <div style={styles.filter}>
       <p style={styles.filterTitle}>{translate('dictionaryPage.filter')}</p>
@@ -75,11 +75,14 @@ export const Filter = ({ filter, setFilter }) => {
   )
 }
 
-export const DualSwitch =  ({ values, changeSelectedValue }: {values: string[], changeSelectedValue: Function}) => {
+export const DualSwitch =  ({
+    values, 
+    changeSelectedValue
+  }: { values: string[], changeSelectedValue: (s : string) => void }) => {
 
   const [checked, setChecked] = React.useState(false);
 
-  const handleChange = event => {
+  const handleChange = (event : any) => {
     setChecked( event.target.checked );
     event.target.checked ? changeSelectedValue(values[0]) : changeSelectedValue(values[1]);
   };

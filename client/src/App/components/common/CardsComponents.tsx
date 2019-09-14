@@ -15,9 +15,9 @@ export const WordCard = ({
     word, 
     elevation, 
     align, 
-    wordDetailAlign, 
+    wordDetailAlign,
     style
-  }: {word: WordType, elevation: number, align: PropTypes.Alignment, wordDetailAlign: PropTypes.Alignment, style: any }) => {
+  }: {word: WordType, elevation?: number, align: PropTypes.Alignment, wordDetailAlign: PropTypes.Alignment, style: any }) => {
   return (
     <Card elevation={ elevation || 1 } style={style}>
       <CardContent>

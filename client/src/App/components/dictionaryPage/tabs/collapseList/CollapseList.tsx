@@ -3,6 +3,17 @@ import Collapse from '@material-ui/core/Collapse';
 import { Typography } from '@material-ui/core';
 import { Column } from 'simple-flexbox'
 import { WordList } from './WordList'
+import { WordType } from '../../../common/types';
+
+type CollapseListType = {
+   horizontal: any, 
+   style: any, 
+   listTitle: any, 
+   wordList: WordType[], 
+   updateSelectedWords: (word: WordType) => void,
+   selectedWords: WordType[],
+   setWordPreview: (word: WordType) => void
+}
 
 const CollapseList = (
   {
@@ -13,7 +24,7 @@ const CollapseList = (
     updateSelectedWords, 
     selectedWords, 
     setWordPreview
-  }) => {
+  } : CollapseListType) => {
 
   const [checked, setChecked] = React.useState([]);
 

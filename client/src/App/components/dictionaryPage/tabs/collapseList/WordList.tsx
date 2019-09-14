@@ -6,11 +6,20 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import CommentIcon from '@material-ui/icons/Comment';
+import { TranslationType, WordType } from '../../../common/types';
+
+
+type WordListType = {
+  wordList: WordType[], 
+  handleToggle: (word: WordType) => void, 
+  checked: string[], 
+  handleWordPreview: (word: WordType )=> void
+}
 
 export const wordItem = () => {
 }
 
-const translationList = (translations) => {
+const translationsToString = (translations: TranslationType[]) => {
   let s = '';
   translations.forEach((translation, i, translations) => {
     if (Object.is(translations.length - 1, i))
@@ -21,7 +30,12 @@ const translationList = (translations) => {
   return s;
 }
 
-export const WordList = ({ wordList, handleToggle, checked, handleWordPreview }) => {
+export const WordList = ({ 
+  wordList,
+  handleToggle, 
+  checked, 
+  handleWordPreview 
+}: WordListType) => {
   return (
     <List>
     {wordList.map((word, index) => {
@@ -32,7 +46,7 @@ export const WordList = ({ wordList, handleToggle, checked, handleWordPreview })
             style={{paddingRight: '30px'}} 
             primary={`${word.name} - ${word.globalName}`}
             primaryTypographyProps={{variant:'body1'}}
-            secondary={`${translationList(word.translations)}`} 
+            secondary={`${translationsToString(word.translations)}`} 
           />
           <ListItemSecondaryAction >
             <IconButton aria-label="wordPreview" onClick={() => handleWordPreview(word)}>

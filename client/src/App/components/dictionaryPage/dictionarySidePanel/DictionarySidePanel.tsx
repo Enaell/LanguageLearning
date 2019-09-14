@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { WordCard, TranslationList } from 'App/components/common/CardsComponents'
+import React from 'react';
+import { WordCard, TranslationList } from '../../common/CardsComponents'
 import Drawer from '@material-ui/core/Drawer';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -12,9 +12,23 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
 import { Column } from 'simple-flexbox';
 import { SelectedWords } from './SelectedWords';
+import { WordType } from '../../common/types';
 
+type DictionarySidePanelType = { 
+  word: WordType,
+  open: boolean,
+  selectedWords: WordType[],
+  toggleSidePanel: (event: any) => void,
+  setWordPreview: (word: WordType) => void,
+  openWordPreview: boolean,
+  openSelectedWords: boolean,
+  toggleSelectedWords: () => void,
+  toggleWordPreview: () => void,
+  classes: any,
+  theme: any 
+}
 
-const styles = theme => ({
+const styles = (theme: any) => ({
   drawer: {
     flexShrink: 0,
   },
@@ -44,7 +58,7 @@ const DictionarySidePanel = ({
   toggleWordPreview,
   classes,
   theme
-}) => {
+} : DictionarySidePanelType) => {
   
   return (
     <Drawer
@@ -71,7 +85,6 @@ const DictionarySidePanel = ({
           <WordCard
             style={{margin: '0 30px', overflow: 'initial'}} 
             word={word}
-            horizontal='center' 
             align='left' 
             wordDetailAlign='center'
           />

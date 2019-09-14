@@ -1,16 +1,14 @@
 import React from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import CommentIcon from '@material-ui/icons/Comment';
+import { TranslationType, WordType } from '../../common/types';
+
 
 export const wordItem = () => {
 }
 
-const translationList = (translations) => {
+const translationsToString = (translations: TranslationType[]) => {
   let s = '';
   translations.forEach((translation, i, translations) => {
     if (Object.is(translations.length - 1, i))
@@ -21,11 +19,10 @@ const translationList = (translations) => {
   return s;
 }
 
-export const SelectedWords = ({ wordList, handleWordPreview }) => {
-
-  console.log('selected words component wordlist');
-  console.log(wordList);
-
+export const SelectedWords = ({ 
+  wordList, handleWordPreview 
+} : { wordList: WordType[], handleWordPreview: (word: WordType) => void }) => {
+  
   return (
     <List>
     {wordList.map((word, index) => {
@@ -35,14 +32,8 @@ export const SelectedWords = ({ wordList, handleWordPreview }) => {
             style={{paddingRight: '30px'}} 
             primary={`${word.name} - ${word.globalName}`}
             primaryTypographyProps={{variant:'body1'}}
-            secondary={`${translationList(word.translations)}`}
-            dense
+            secondary={`${translationsToString(word.translations)}`}
           />
-          {/* <ListItemSecondaryAction >
-            <IconButton aria-label="wordPreview" onClick={handleWordPreview(word)}>
-              <CommentIcon />
-            </IconButton>
-          </ListItemSecondaryAction> */}
         </ListItem>
       )})
     }
