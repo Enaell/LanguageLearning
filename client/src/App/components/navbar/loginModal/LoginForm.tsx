@@ -4,8 +4,23 @@ import { Column, Row } from 'simple-flexbox';
 import TextField from '@material-ui/core/TextField';
 import translate from 'counterpart';
 
+type LoginFormType = {
+  handleEmailChange: (event: any) => void, 
+  handleUserNameChange: (event: any) => void, 
+  handlePasswordChange: (event: any) => void, 
+  passwordError: boolean, 
+  usernameError: boolean, 
+  emailAddressError: boolean
+};
 
-const LoginForm = ({handleEmailChange, handleUserNameChange, handlePasswordChange, passwordError, usernameError, emailAddressError}) => {
+const LoginForm = ({
+  handleEmailChange, 
+  handleUserNameChange, 
+  handlePasswordChange, 
+  passwordError, 
+  usernameError, 
+  emailAddressError
+}: LoginFormType) => {
   
   const emailMessage = usernameError ? translate('connection.usernameOrEmailError') : (emailAddressError ? translate('connection.emailInvalidError') : null)
   return(

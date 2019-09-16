@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import MainPage from './MainPage'
+import { withRouter } from "react-router-dom";
 
 
 function mapStateToProps(state){
@@ -15,4 +16,4 @@ function mapDispatchToProps(dispatch){
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MainPage));

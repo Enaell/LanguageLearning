@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import CollapseList from './collapseList';
 import { Row } from 'simple-flexbox'
+import { WordType } from '../../common/types';
 
-const OrderList = ({dictionary, sortDictionary}) => {
+const OrderList = ({ dictionary, sortDictionary }: { dictionary: WordType[], sortDictionary: (dictionary: WordType[]) => {} }) => {
 
   const [listOfWords, setlistOfWords] = useState(sortDictionary ? sortDictionary(dictionary): {});
 

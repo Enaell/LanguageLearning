@@ -2,11 +2,10 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import translate from 'counterpart';
 import { Column } from 'simple-flexbox';
-import { withRouter } from "react-router-dom";
-import  {PageTitle, PageDescription}  from 'App/components/common/GenericComponents'
+import  {PageTitle, PageDescription}  from '../common/GenericComponents'
 
 
-const MainPage = ({ onLoginClick, history }) => {
+const MainPage = ({ onLoginClick, history }: {onLoginClick: () => {}, history: any}) => {
 
   const handleOnCardTrainingClick = () => {
     history.push('/cardTraining');  
@@ -30,4 +29,4 @@ const MainPage = ({ onLoginClick, history }) => {
   );
 }
 
-export default withRouter(MainPage);
+export default MainPage;

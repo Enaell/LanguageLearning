@@ -6,8 +6,9 @@ import DictionaryTabs from './tabs';
 import DictionarySidePanel from './dictionarySidePanel';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
+import { UserType } from '../common/types';
 
-const styles = theme => ({
+const styles = (theme: any) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -26,7 +27,12 @@ const styles = theme => ({
 });
 
 
-const DictionaryPage = ({user, getAllWords, openSidePanel, classes}) => {
+const DictionaryPage = ({ 
+  user, 
+  getAllWords, 
+  openSidePanel, 
+  classes
+}: { user: UserType, getAllWords: (language: string, token: string) => void, openSidePanel: boolean, classes: any }) => {
 
   useEffect(()=>{
     const token = user.id ? user.id : null;

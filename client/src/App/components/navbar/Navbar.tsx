@@ -9,11 +9,23 @@ import LoginModal from './loginModal';
 import NavSnackBar from './navSnackBar';
 import UserBar from './userBar'
 import translate from 'counterpart';
-import { withRouter } from "react-router-dom";
+import { UserType } from '../common/types';
 
+type NavbarType = {
+  user: UserType,
+  openLoginModal: () => void, 
+  openSigninModal: () => void, 
+  classes: any, 
+  history: any
+}
 
-
-const Navbar = ({user, openLoginModal, openSigninModal, classes, history}) => {
+const Navbar = ({
+  user, 
+  openLoginModal, 
+  openSigninModal, 
+  classes, 
+  history
+}: NavbarType) => {
 
   const handleSideMenuClick = () => {}
 
@@ -34,7 +46,7 @@ const Navbar = ({user, openLoginModal, openSigninModal, classes, history}) => {
             </Typography>
           </Button>
           <div className={classes.grow} />
-          {user.id ? 
+          {user.id ?
             <UserBar/>
           :
             <div>
@@ -54,4 +66,4 @@ const Navbar = ({user, openLoginModal, openSigninModal, classes, history}) => {
   );
 }
 
-export default withRouter( Navbar );
+export default Navbar;

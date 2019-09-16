@@ -9,8 +9,16 @@ import LoginForm from './LoginForm';
 import SigninForm from './SigninForm';
 import translate from 'counterpart';
 
+type LoginModalType = {
+  onLogin: any,
+  onSignin: any,
+  closeModal: any,
+  open: boolean,
+  tabNumber: number,
+  changeTabNumber: (num: number) => void
+}
 
-const LoginModal = ({onLogin, onSignin, closeModal, open, tabNumber, changeTabNumber}) => {
+const LoginModal = ({onLogin, onSignin, closeModal, open, tabNumber, changeTabNumber} : LoginModalType) => {
 
   const [username, setUsername] = React.useState("");
   const [emailAddress, setEmailAddress] = React.useState("");
@@ -60,7 +68,7 @@ const LoginModal = ({onLogin, onSignin, closeModal, open, tabNumber, changeTabNu
       onLogin(username, emailAddress, password);
   }
 
-  function handleTabChange(event, newValue){
+  function handleTabChange(event: any, newValue: number){
     setUsernameError(false);
     setPasswordError(false);
     setEmailAddressError(false);
@@ -91,8 +99,7 @@ const LoginModal = ({onLogin, onSignin, closeModal, open, tabNumber, changeTabNu
                 passwordError = {passwordError}
                 emailAddressError = {emailAddressError}
                 usernameError = {usernameError}
-              >
-              </LoginForm>
+              />
             }
             {tabNumber === 1 &&
               <SigninForm
@@ -102,8 +109,7 @@ const LoginModal = ({onLogin, onSignin, closeModal, open, tabNumber, changeTabNu
                 passwordError = {passwordError}
                 emailAddressError = {emailAddressError}
                 usernameError = {usernameError}
-              >
-              </SigninForm>
+              />
             }
           </DialogContent>
           <DialogActions>

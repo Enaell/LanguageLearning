@@ -4,13 +4,14 @@ import translate from 'counterpart';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import OrderList from './OrderList';
-import { Filter, DualSwitch } from 'App/components/common/GenericComponents';
+import { Filter, DualSwitch } from '../../common/GenericComponents';
+import { WordType } from '../../common/types';
 
-const firstLetterSortedDictionary = dictionary => {
+const firstLetterSortedDictionary = (dictionary: WordType[]) => {
   
   let sortedDictionary = {}
 
-  dictionary.forEach(word => {
+  dictionary.forEach((word: WordType) => {
     if (!sortedDictionary.hasOwnProperty(word.globalName.charAt(0)))
       sortedDictionary[word.globalName.charAt(0)] = [];
     sortedDictionary[word.globalName.charAt(0)].push(word);
@@ -18,11 +19,11 @@ const firstLetterSortedDictionary = dictionary => {
   return sortedDictionary;
 }
 
-const subjectSortedDictionary = dictionary => {
+const subjectSortedDictionary = (dictionary: WordType[]) => {
 
   let sortedDictionary = {}
   
-  dictionary.forEach(word => {
+  dictionary.forEach((word: WordType) => {
     (word.subject).forEach(subject => {
       if (!sortedDictionary.hasOwnProperty(subject))
         sortedDictionary[subject] = [];
@@ -32,11 +33,11 @@ const subjectSortedDictionary = dictionary => {
   return sortedDictionary;
 }
 
-const alphabeticSort =  (a, b) => a.globalName > b.globalName;
+const alphabeticSort =  (a: WordType, b: WordType) => a.globalName > b.globalName;
 
-const levelSort = (a, b) => a.level > b.level;
+const levelSort = (a: WordType, b: WordType) => a.level > b.level;
 
-const filteredWords = (words, filter) => {
+const filteredWords = (words: WordType[], filter: string) => {
 
   if (filter && filter.length > 0) {
     return (
@@ -53,10 +54,10 @@ const filteredWords = (words, filter) => {
 };
 
 
-const DictionaryTabs = ({words}) =>{
+const DictionaryTabs = ({ words }: { words: WordType[] }) =>{
 
-  const alphabeticOrderText = translate('dictionaryPage.alphabeticOrder');
-  const levelOrderText = translate('dictionaryPage.levelOrder');
+  const alphabeticOrderText: string = translate('dictionaryPage.alphabeticOrder');
+  const levelOrderText: string = translate('dictionaryPage.levelOrder');
 
   const switchValues = [alphabeticOrderText, levelOrderText];
 
@@ -69,7 +70,7 @@ const DictionaryTabs = ({words}) =>{
 
   const [filter, setFilter] = useState('');
 
-  const handleSubFunctionChange = value => {
+  const handleSubFunctionChange = (value: string) => {
     setDictionary(dictionary.sort(sortBySwitchValue[value]));
   }
 
@@ -79,7 +80,7 @@ const DictionaryTabs = ({words}) =>{
 
   const [tabNumber, setTabNumber] = useState(0);
 
-  const handleTabChange = (event, newValue) => {
+  const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setTabNumber(newValue);
   }
 

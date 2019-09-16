@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import Navbar from './Navbar';
 import { withStyles } from '@material-ui/core/styles';
+import { withRouter } from "react-router-dom";
+
 
 const styles = theme => ({
   root: {
@@ -40,4 +42,4 @@ function mapDispatchToProps(dispatch)
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Navbar));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withRouter( Navbar )));

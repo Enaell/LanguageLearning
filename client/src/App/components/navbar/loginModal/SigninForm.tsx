@@ -3,8 +3,24 @@ import { Column, Row } from 'simple-flexbox';
 import TextField from '@material-ui/core/TextField';
 import translate from 'counterpart';
 
+type SigninFormType = {
+  handleEmailChange: (event: any) => void, 
+  handleUserNameChange: (event: any) => void, 
+  handlePasswordChange: (event: any) => void, 
+  passwordError: boolean, 
+  usernameError: boolean, 
+  emailAddressError: boolean
+};
 
-const SigninForm = ({handleEmailChange, handleUserNameChange, handlePasswordChange, passwordError, usernameError, emailAddressError}) => {
+const SigninForm = ({
+  handleEmailChange, 
+  handleUserNameChange, 
+  handlePasswordChange, 
+  passwordError, 
+  usernameError, 
+  emailAddressError
+}: SigninFormType) => {
+  
   return(
     <Column>
     <Row horizontal='space-between'>

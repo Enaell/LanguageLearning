@@ -1,4 +1,8 @@
 
+export type UserType = {
+    id: string
+} 
+
 export type SentencesType = {
     sentence: string,
     translatedSentence: string
@@ -17,6 +21,7 @@ export type WordType= {
     globalName: string,
     language: string,
     subject: string[],
+    level?: number,
     translations: TranslationType[],
     comments: string,
     validated: boolean, //(this field is to differenciate cards validated by admin from others)
