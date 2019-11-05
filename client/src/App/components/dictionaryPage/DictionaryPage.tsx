@@ -4,7 +4,6 @@ import translate from 'counterpart';
 import  { PageTitle }  from '../common/GenericComponents';
 import DictionaryTabs from './tabs';
 import DictionarySidePanel from './dictionarySidePanel';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { UserType } from '../common/types';
 
@@ -32,7 +31,11 @@ const DictionaryPage = ({
   getAllWords, 
   openSidePanel, 
   classes
-}: { user: UserType, getAllWords: (language: string, token: string) => void, openSidePanel: boolean, classes: any }) => {
+}: { user: UserType, getAllWords: (language: string, token: string | null) => void, openSidePanel: boolean, classes: any }) => {
+
+  const contentShiftClasses = {
+    [classes.contentShift]: openSidePanel,
+  }
 
   useEffect(()=>{
     const token = user.id ? user.id : null;
@@ -43,9 +46,7 @@ const DictionaryPage = ({
     <Column 
       style={{width: '100%', maxWidth: '1200px'}}
       horizontal='center'
-      className={classNames(classes.content, {
-        [classes.contentShift]: openSidePanel,
-      })}
+      className={`${classes.content} ${contentShiftClasses}`}
     >
       <PageTitle title={translate('dictionaryPage.title')} ></PageTitle>
       <Row style={{width: '100%'}}>

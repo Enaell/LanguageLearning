@@ -1,11 +1,11 @@
 {
-  "ZWXdb": {
+  "db": {
     "host": "localhost",
     "port": 27017,
     "url": "",
     "database": "ZhongWenXue",
     "password": "",
-    "name": "ZWXdb",
+    "name": "db",
     "user": "me",
     "connector": "mongodb"
   }

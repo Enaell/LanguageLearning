@@ -14,29 +14,29 @@
     ]
   },
   "word": {
-    "dataSource": "ZWXdb",
+    "dataSource": "db",
     "public": true
   },
   "wordList": {
-    "dataSource": "ZWXdb",
+    "dataSource": "db",
     "public": true
   },
   "customer": {
-    "dataSource": "ZWXdb",
+    "dataSource": "db",
     "public": true,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "User": {
-    "dataSource": "ZWXdb",
+    "dataSource": "db",
     "public": true,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "AccessToken": {
-    "dataSource": "ZWXdb",
+    "dataSource": "db",
     "public": false,
     "relations": {
       "user": {
@@ -47,18 +47,18 @@
     }
   },
   "ACL": {
-    "dataSource": "ZWXdb",
+    "dataSource": "db",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "ZWXdb",
+    "dataSource": "db",
     "options": {
       "strictObjectIDCoercion": true
     },
     "public": false
   },
   "Role": {
-    "dataSource": "ZWXdb",
+    "dataSource": "db",
     "public": false
   }
 }

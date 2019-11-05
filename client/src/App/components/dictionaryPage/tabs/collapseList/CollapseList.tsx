@@ -31,7 +31,7 @@ const CollapseList = (
   const setWordList = () => {
     const newChecked = [...checked];
     wordList.forEach((word, index) => {
-      const value = `${index}`;
+      const value = `${index}` as never;
       const checkedIndex = newChecked.indexOf(value);
 
       if (selectedWords.indexOf(word) !== -1){
@@ -55,7 +55,7 @@ const CollapseList = (
   };
 
 
-  const handleToggle = word => {
+  const handleToggle = (word: WordType) => {
     updateSelectedWords(word)
   };
 

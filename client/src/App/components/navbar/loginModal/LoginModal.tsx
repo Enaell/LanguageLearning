@@ -28,16 +28,16 @@ const LoginModal = ({onLogin, onSignin, closeModal, open, tabNumber, changeTabNu
   const [emailAddressError, setEmailAddressError] = React.useState(false);
   const [passwordError, setPasswordError] = React.useState(false);
 
-  function handleUserNameChange(e){
-    setUsername(e.target.value);
+  function handleUserNameChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
+    setUsername(event.target.value);
   }
 
-  function handleEmailChange(e){
-    setEmailAddress(e.target.value);
+  function handleEmailChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
+    setEmailAddress(event.target.value);
   }
 
-  function handlePasswordChange(e){
-    setPassword(e.target.value);
+  function handlePasswordChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
+    setPassword(event.target.value);
   }
 
   const onSigninClick = () => {

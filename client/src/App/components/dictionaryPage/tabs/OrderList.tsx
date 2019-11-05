@@ -3,8 +3,14 @@ import CollapseList from './collapseList';
 import { Row } from 'simple-flexbox'
 import { WordType } from '../../common/types';
 
-const OrderList = ({ dictionary, sortDictionary }: { dictionary: WordType[], sortDictionary: (dictionary: WordType[]) => {} }) => {
-
+const OrderList = ({ dictionary, sortDictionary }
+  : { 
+      dictionary: WordType[], 
+      sortDictionary: (dictionary: WordType[]) => {
+        [key: string]: WordType[];
+      } 
+  }) => {
+    
   const [listOfWords, setlistOfWords] = useState(sortDictionary ? sortDictionary(dictionary): {});
 
   useEffect(() => setlistOfWords(sortDictionary ? sortDictionary(dictionary): {}), [dictionary, sortDictionary])

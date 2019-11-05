@@ -19,7 +19,7 @@ module.exports = function(app) {
 
   //     RoleMapping.create({
   //       principalType: "USER",
-  //       roleId: role[0].id
+  //       roleId: role[0].id,
   //       principalId: users[0].id,
   //     }, function(err, roleMapping) {
     

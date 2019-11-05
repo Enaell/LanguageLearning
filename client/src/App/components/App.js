@@ -16,7 +16,7 @@ import localeEn from '../locale/en.json';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import RouteNotFound from './RouteNotfound';
 import { Column } from 'simple-flexbox';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import {ThemeProvider} from '@material-ui/core/styles';
 import theme from '../theme';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -54,7 +54,7 @@ class App extends Component {
   render() {
     return (
       <ReactRedux.Provider store={store}>
-        <MuiThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
           <BrowserRouter>
             <Column horizontal='center'>
               <Navbar/>
@@ -68,7 +68,7 @@ class App extends Component {
               <Footer />
             </Column>
           </BrowserRouter>
-        </MuiThemeProvider>
+        </ThemeProvider>
       </ReactRedux.Provider>
     );
   }

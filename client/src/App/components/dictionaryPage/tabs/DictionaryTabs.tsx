@@ -9,7 +9,7 @@ import { WordType } from '../../common/types';
 
 const firstLetterSortedDictionary = (dictionary: WordType[]) => {
   
-  let sortedDictionary = {}
+  let sortedDictionary: {[key: string]: WordType[]} = {}
 
   dictionary.forEach((word: WordType) => {
     if (!sortedDictionary.hasOwnProperty(word.globalName.charAt(0)))
@@ -21,7 +21,7 @@ const firstLetterSortedDictionary = (dictionary: WordType[]) => {
 
 const subjectSortedDictionary = (dictionary: WordType[]) => {
 
-  let sortedDictionary = {}
+  let sortedDictionary: {[key: string]: WordType[]} = {}
   
   dictionary.forEach((word: WordType) => {
     (word.subject).forEach(subject => {
@@ -33,9 +33,9 @@ const subjectSortedDictionary = (dictionary: WordType[]) => {
   return sortedDictionary;
 }
 
-const alphabeticSort =  (a: WordType, b: WordType) => a.globalName > b.globalName;
+const alphabeticSort =  (a: WordType, b: WordType) => a.globalName > b.globalName ? 1 : -1;
 
-const levelSort = (a: WordType, b: WordType) => a.level > b.level;
+const levelSort = (a: WordType, b: WordType) => a.level > b.level ? 1 : -1;
 
 const filteredWords = (words: WordType[], filter: string) => {
 
@@ -61,7 +61,7 @@ const DictionaryTabs = ({ words }: { words: WordType[] }) =>{
 
   const switchValues = [alphabeticOrderText, levelOrderText];
 
-  const sortBySwitchValue = {
+  const sortBySwitchValue: {[key: string]: (a: WordType, b: WordType) => number} = {
     alphabeticOrderText: alphabeticSort,
     levelOrderText: levelSort
   }

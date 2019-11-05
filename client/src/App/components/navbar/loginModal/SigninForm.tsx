@@ -4,9 +4,9 @@ import TextField from '@material-ui/core/TextField';
 import translate from 'counterpart';
 
 type SigninFormType = {
-  handleEmailChange: (event: any) => void, 
-  handleUserNameChange: (event: any) => void, 
-  handlePasswordChange: (event: any) => void, 
+  handleEmailChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void, 
+  handleUserNameChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void, 
+  handlePasswordChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void, 
   passwordError: boolean, 
   usernameError: boolean, 
   emailAddressError: boolean
